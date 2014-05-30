@@ -36,6 +36,7 @@
 #include <lmb.h>
 #include <linux/ctype.h>
 #include <asm/byteorder.h>
+#include <fastboot.h>
 
 #if defined(CONFIG_CMD_USB)
 #include <usb.h>
@@ -661,6 +662,73 @@ int do_bootm (cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 		if ((*endp != 0) && (*endp != ':') && (*endp != '#'))
 			return do_bootm_subcommand(cmdtp, flag, argc, argv);
 	}
+
+#if defined(CONFIG_FASTBOOT)
+        struct fastboot_boot_img_hdr *fb_hdr;
+
+        /* find out fastboot image address */
+        if (argc < 2) {
+                fb_hdr = (struct fastboot_boot_img_hdr*)load_addr;
+                debug ("*  fastboot: default image load address = 0x%08lx\n",
+                                load_addr);
+        } else {
+                fb_hdr = (struct fastboot_boot_img_hdr*)
+                        simple_strtoul(argv[1], NULL, 16);
+        }
+
+        if (0 == memcmp(fb_hdr, FASTBOOT_BOOT_MAGIC,
+                                FASTBOOT_BOOT_MAGIC_SIZE)) {
+                char start[9];
+                char ramdisk[9];
+                char* fb_argv[] = { "bootm", start, ramdisk };
+
+                /* Number of pages for kernel image */
+                int npages = (fb_hdr->kernel_size + fb_hdr->page_size - 1)
+                        / fb_hdr->page_size;
+
+                /*
+                 * Move kernel & ramdisk image to physical address specified
+                 * in fastboot image header.
+                 */
+                memcpy((void*)fb_hdr->kernel_addr,
+                                (void*)fb_hdr + (1 * fb_hdr->page_size),
+                                fb_hdr->kernel_size);
+
+                memcpy((void*)fb_hdr->ramdisk_addr + sizeof(image_header_t),
+                                (void*)fb_hdr + ((1 + npages)
+                                        * fb_hdr->page_size),
+                                fb_hdr->ramdisk_size);
+
+                /*
+                 * Adding ramdisk image header since u-boot detects the
+                 * ramdisk with its own image format in boot_get_ramdisk().
+                 */
+                image_header_t *ih = (image_header_t *)fb_hdr->ramdisk_addr;
+
+                memset(ih, 0, sizeof(image_header_t));
+                strcpy((char*)ih->ih_name, "Simple Ramdisk");
+                image_set_magic(ih, IH_MAGIC);
+                image_set_os(ih, IH_OS_LINUX);
+                image_set_arch(ih, IH_ARCH_ARM);
+                image_set_type(ih, IH_TYPE_RAMDISK);
+                image_set_load(ih, fb_hdr->ramdisk_addr
+                                + sizeof(image_header_t));
+                image_set_size(ih, fb_hdr->ramdisk_size);
+                image_set_dcrc(ih, crc32(0, (uint8_t *)image_get_load(ih),
+                                        image_get_size(ih)));
+                image_set_hcrc(ih, crc32(0, (uint8_t *)ih,
+                                        sizeof(image_header_t)));
+
+                /*
+                 * Run "bootm" command with new address of zImage and ramdisk
+                 */
+                sprintf(start, "%08x", fb_hdr->kernel_addr);
+                sprintf(ramdisk, "%08x", fb_hdr->ramdisk_addr);
+
+                return do_bootm(cmdtp, flag,
+                                sizeof(fb_argv) / sizeof(fb_argv[0]), fb_argv);
+        }
+#endif
 
 	if (bootm_start(cmdtp, flag, argc, argv))
 		return 1;
