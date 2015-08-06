@@ -42,6 +42,84 @@ static int do_logo_size(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[
             height = 2160;    
             fbw = 1920;
             fbh = 1080;
+	} else if ((strncmp(mode, "640X480", 7) == 0) ||
+			(strncmp(mode, "640x480", 7) == 0)) {
+		width = 640;
+		height = 480;
+		fbw = 640;
+		fbh = 480;
+	} else if ((strncmp(mode, "1024X768", 8) == 0) ||
+			(strncmp(mode, "1024x768", 8) == 0)) {
+		width = 1024;
+		height = 768;
+		fbw = 1024;
+		fbh = 768;
+	} else if ((strncmp(mode, "1280X1024", 9) == 0) ||
+			(strncmp(mode, "1280x1024", 9) == 0)) {
+		width = 1280;
+		height = 1024;
+		fbw = 1280;
+		fbh = 1024;
+	} else if ((strncmp(mode, "800X480", 7) == 0) ||
+			(strncmp(mode, "800x480", 7) == 0)) {
+		width = 800;
+		height = 480;
+		fbw = 800;
+		fbh = 480;
+	} else if ((strncmp(mode, "800X600", 7) == 0) ||
+			(strncmp(mode, "800x600", 7) == 0)) {
+		width = 800;
+		height = 600;
+		fbw = 800;
+		fbh = 600;
+	} else if ((strncmp(mode, "1024X600", 8) == 0) ||
+			(strncmp(mode, "1024x600", 8) == 0)) {
+		width = 1024;
+		height = 600;
+		fbw = 1920;
+		fbh = 1080;
+	} else if ((strncmp(mode, "1280X800", 8) ==  0) ||
+			(strncmp(mode, "1280x800", 8) ==  0)) {
+		width = 1280;
+		height = 800;
+		fbw = 1920;
+		fbh = 1080;
+	} else if ((strncmp(mode, "1360X768", 8) == 0) ||
+			(strncmp(mode, "1360x768", 8) == 0)) {
+		width = 1360;
+		height = 768;
+		fbw = 1920;
+		fbh = 1080;
+	} else if ((strncmp(mode, "1366X768", 8) == 0) ||
+			(strncmp(mode, "1366x768", 8) == 0)) {
+		width = 1366;
+		height = 768;
+		fbw = 1920;
+		fbh = 1080;
+	} else if ((strncmp(mode, "1440X900", 8) == 0) ||
+			(strncmp(mode, "1440x900", 8) == 0)) {
+		width = 1440;
+		height = 900;
+		fbw = 1440;
+		fbh = 900;
+	} else if ((strncmp(mode, "1600X900", 8) == 0) ||
+			(strncmp(mode, "1600x900", 8) == 0)) {
+		width = 1600;
+		height = 900;
+		fbw = 1600;
+		fbh = 900;
+	} else if ((strncmp(mode, "1680X1050", 9) == 0) ||
+			(strncmp(mode, "1680x1050", 9) == 0)) {
+		width = 1680;
+		height = 1050;
+		fbw = 1920;
+		fbh = 1080;
+	} else if ((strncmp(mode, "1920X1200", 9) == 0) ||
+			(strncmp(mode, "1920x1200", 9) == 0)) {
+		width = 1920;
+		height = 1200;
+		fbw = 1920;
+		fbh = 1200;
         } else {
             width = 1920;
             height = 1080;

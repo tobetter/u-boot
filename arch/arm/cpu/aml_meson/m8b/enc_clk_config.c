@@ -56,7 +56,6 @@ static void set_hpll_clk_out(unsigned clk)
     aml_write_reg32_op(P_HHI_VID_PLL_CNTL4, 0x40238100);
     aml_write_reg32_op(P_HHI_VID_PLL_CNTL5, 0x00012286);
     aml_write_reg32_op(P_HHI_VID2_PLL_CNTL2, 0x430a800);       // internal LDO share with HPLL & VIID PLL
-    aml_write_reg32_op(P_HHI_HDMI_PHY_CNTL0, 0x08c31e8b);
     switch(clk){
     case 2970:	/* VMODE_720P, VMODE_1080I, VMODE_1080P, VMODE_720P_50HZ,
 		   VMODE_1080I_50HZ, VMODE_1080P_50HZ, VMODE_1080P_24HZ */
@@ -93,6 +92,126 @@ static void set_hpll_clk_out(unsigned clk)
 	    aml_write_reg32(P_HHI_VID_PLL_CNTL5, 0x00016385);
 	    WAIT_FOR_PLL_LOCKED(P_HHI_VID_PLL_CNTL);
 	    break;
+    case 1422:	/* VMODE_1280X800 */
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8c000);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL4, 0x4023d100);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL3, 0x8a7ad023);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL5, 0x12286);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x6000043b);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x4000043b);
+	    WAIT_FOR_PLL_LOCKED(P_HHI_VID_PLL_CNTL);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8c40f);
+	    break;
+    case 2380:	/* VMODE_800X480P_60HZ */
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x59c80000);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL3, 0x0a563823);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL4, 0x0123b100);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL5, 0x12385);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x60010431);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x40010431);
+	    WAIT_FOR_PLL_LOCKED(P_HHI_VID_PLL_CNTL);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8c994);
+	    break;
+    case 1716:	/* VMODE_1366X768P_60HZ */
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8c000);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL4, 0x4023d100);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL3, 0x8a7ad023);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL5, 0x12286);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x60000447);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x40000447);
+	    WAIT_FOR_PLL_LOCKED(P_HHI_VID_PLL_CNTL);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8c7f8);
+	    break;
+    case 1600:	/* VMODE_800X600P_60HZ */
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8c000);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL3, 0x8a7ad023);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL4, 0x4023d100);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL5, 0x12286);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x60000442);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x40000442);
+	    WAIT_FOR_PLL_LOCKED(P_HHI_VID_PLL_CNTL);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8c506);
+	    break;
+    case 2058:	/* VMODE_1024X600P_60HZ */
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x59c80000);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL3, 0x0a563823);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL4, 0x0123b100);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL5, 0x12385);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x6001042a);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x4001042a);
+	    WAIT_FOR_PLL_LOCKED(P_HHI_VID_PLL_CNTL);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8cdf4);
+	    break;
+    case 2600:	/* VMODE_1024X768P_60HZ */
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x59c80000);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL3, 0x0a563823);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL4, 0x0123b100);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL5, 0x12385);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x60010436);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x40010436);
+	    WAIT_FOR_PLL_LOCKED(P_HHI_VID_PLL_CNTL);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8c294);
+	    break;
+    case 1710:	/* VMODE_1360X768P_60HZ */
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8c000);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL3, 0x8a7ad023);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL4, 0x4023d100);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL5, 0x12286);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x60000447);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x40000447);
+	    WAIT_FOR_PLL_LOCKED(P_HHI_VID_PLL_CNTL);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8c3ac);
+	    break;
+    case 2130:	/* VMODE_1440X900P_60HZ */
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x59c80000);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL3, 0x0a563823);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL4, 0x0123b100);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL5, 0x12385);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x6001042c);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x4001042c);
+	    WAIT_FOR_PLL_LOCKED(P_HHI_VID_PLL_CNTL);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8c74f);
+	    break;
+    case 2925:	/* VMODE_1680X1050P_60HZ */
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x59c80000);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL3, 0x0a563823);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL4, 0x0123b100);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL5, 0x12385);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x6001043c);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x4001043c);
+	    WAIT_FOR_PLL_LOCKED(P_HHI_VID_PLL_CNTL);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8cfb4);
+	    break;
+    case 1540:	/* VMODE_1920X1200 */
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8c2ab);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL4, 0x4023d100);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL3, 0x8a7ad023);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL5, 0x12286);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x60000440);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x40000440);
+	    WAIT_FOR_PLL_LOCKED(P_HHI_VID_PLL_CNTL);
+	    break;
+    case 2014:	/* VMODE_640X480P_60HZ */
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x59c8cf55);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL3, 0x0a563823);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL4, 0x0123b100);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL5, 0x12385);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x60010429);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x40010429);
+	    WAIT_FOR_PLL_LOCKED(P_HHI_VID_PLL_CNTL);
+	    break;
+    case 1058:	/* VMODE_800X600P_60HZ */
+	    WRITE_CBUS_REG(HHI_VID_PLL_CNTL, 0x422);
+	    break;
+    case 1080:	/* VMODE_1280X1024P_60HZ */
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL2, 0x69c8c000);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL4, 0x4023d100);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL3, 0x8a7ad023);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL5, 0x12286);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x6000042d);
+	    aml_write_reg32(P_HHI_VID_PLL_CNTL,  0x4000042d);
+	    WAIT_FOR_PLL_LOCKED(P_HHI_VID_PLL_CNTL);
+	    break;
     default:
 	    printf("error hpll clk: %d\n", clk);
 	    break;
@@ -125,7 +244,7 @@ static void set_hpll_hdmi_od(unsigned div)
             aml_set_reg32_bits_op(P_HHI_VID_PLL_CNTL, 1, 16, 2);
             break;
         case 4:
-            aml_set_reg32_bits_op(P_HHI_VID_PLL_CNTL, 3, 18, 2);
+            aml_set_reg32_bits_op(P_HHI_VID_PLL_CNTL, 2, 18, 2);
             break;
         case 8:
             aml_set_reg32_bits_op(P_HHI_VID_PLL_CNTL, 1, 16, 2);
@@ -277,9 +396,19 @@ static enc_clk_val_t setting_enc_clk_val[] = {
     {VMODE_1080I_50HZ, 2970, 4, 2, 1, VIU_ENCP, 10, 1, 2, 1, -1, -1, -1,  1, -1},
     {VMODE_1080P_50HZ, 2970, 2, 2, 1, VIU_ENCP, 10, 1, 1, 1, -1, -1, -1,  1, -1},
     {VMODE_1080P_24HZ, 2970, 4, 2, 1, VIU_ENCP, 10, 2, 1, 1, -1, -1, -1,  1, -1},
-//    {VMODE_VGA,  1066, 3, 1, 1, VIU_ENCP, 10, 1, 2, 1, -1, -1, -1,  1,  1},
-//    {VMODE_SVGA, 1058, 2, 1, 1, VIU_ENCP, 10, 1, 2, 1, -1, -1, -1,  1,  1},
-//    {VMODE_XGA, 1085, 1, 1, 1, VIU_ENCP, 5, 1, 1, 1, -1, -1, -1,  1,  1},
+    {VMODE_640X480P_60HZ,  2014, 8, 1, 1, VIU_ENCP, 10, 4, 1, 1, -1, -1, -1,  1,  -1},
+    {VMODE_800X480P_60HZ, 2380, 8, 4, 1, VIU_ENCP,  10, 4, 1, 1, -1, -1, -1, 1, -1},
+    {VMODE_800X600P_60HZ, 1600, 4, 4, 1, VIU_ENCP,  10, 1, 1, 1, -1, -1, -1, 1,  -1},
+    {VMODE_1024X600P_60HZ, 2058, 4, 4, 1, VIU_ENCP,  10, 1, 1, 1, -1, -1, -1,  1, -1},
+    {VMODE_1024X768P_60HZ, 2600, 4, 4, 1, VIU_ENCP,  10, 1, 1, 1, -1, -1, -1,  1, -1},
+    {VMODE_1280X800,   1422, 2, 2, 1, VIU_ENCP, 10, 1, 1, 1, -1, -1, -1,  1,  -1},
+    {VMODE_1280X1024P_60HZ,1080, 1, 1, 1, VIU_ENCP, 10, 1, 1, 1, -1, -1, -1,  1, -1},
+    {VMODE_1360X768P_60HZ, 1710, 2, 2, 1, VIU_ENCP,  10, 1, 1, 1, -1, -1, -1,  1, -1},
+    {VMODE_1366X768P_60HZ, 1716, 2, 2, 1, VIU_ENCP,  10, 1, 1, 1, -1, -1, -1,  1, -1},
+    {VMODE_1440X900P_60HZ, 2130, 2, 2, 1, VIU_ENCP,  10, 1, 1, 1, -1, -1, -1,  1, -1},
+    {VMODE_1600X900P_60HZ, 2160, 2, 2, 1, VIU_ENCP,  10, 1, 1, 1, -1, -1, -1,  1, -1},
+    {VMODE_1680X1050P_60HZ, 2925, 2, 2, 1, VIU_ENCP,  10, 1, 1, 1, -1, -1, -1,  1, -1},
+    {VMODE_1920X1200,  1540, 1, 1, 1, VIU_ENCP, 10, 1, 1, 1, -1, -1, -1,  1, -1},
 };
 
 void set_vmode_clk(vmode_t mode)

@@ -69,6 +69,45 @@ static int to_mode(char *mode_name)
 		return TVOUT_576CVBS;
 	if((strcmp(mode_name, "480CVBS")==0)||(strcmp(mode_name, "480cvbs")==0))
 		return TVOUT_480CVBS;
+	if ((strcmp(mode_name, "640X480P60HZ") == 0) ||
+			(strcmp(mode_name, "640x480p60hz") == 0))
+		return TVOUT_640X480P_60HZ;
+	if ((strcmp(mode_name, "800X480P60HZ") == 0) ||
+			(strcmp(mode_name, "800x480p60hz") == 0))
+		return TVOUT_800X480P_60HZ;
+	if ((strcmp(mode_name, "800X600P60HZ") == 0) ||
+			(strcmp(mode_name, "800x600p60hz") == 0))
+		return TVOUT_800X600P_60HZ;
+	if ((strcmp(mode_name, "1024X600P60HZ") == 0) ||
+			(strcmp(mode_name, "1024x600p60hz") == 0))
+		return TVOUT_1024X600P_60HZ;
+	if ((strcmp(mode_name, "1024X768P60HZ") == 0) ||
+			(strcmp(mode_name, "1024x768p60hz") == 0))
+		return TVOUT_1024X768P_60HZ;
+	if ((strcmp(mode_name, "1280X800")  ==  0) ||
+			(strcmp(mode_name, "1280x800")  ==  0))
+		return TVOUT_1280X800;
+	if ((strcmp(mode_name, "1280X1024P60HZ") == 0) ||
+			(strcmp(mode_name, "1280x1024p60hz") == 0))
+		return TVOUT_1280X1024P_60HZ;
+	if ((strcmp(mode_name, "1360X768P60HZ") == 0) ||
+			(strcmp(mode_name, "1360x768p60hz") == 0))
+		return TVOUT_1360X768P_60HZ;
+	if ((strcmp(mode_name, "1366X768P60HZ") == 0) ||
+			(strcmp(mode_name, "1366x768p60hz") == 0))
+		return TVOUT_1366X768P_60HZ;
+	if ((strcmp(mode_name, "1440X900P60HZ") == 0) ||
+			(strcmp(mode_name, "1440x900p60hz") == 0))
+		return TVOUT_1440X900P_60HZ;
+	if ((strcmp(mode_name, "1600X900P60HZ") == 0) ||
+			(strcmp(mode_name, "1600x900p60hz") == 0))
+		return TVOUT_1600X900P_60HZ;
+	if ((strcmp(mode_name, "1680X1050P60HZ") == 0) ||
+			(strcmp(mode_name, "1680x1050p60hz") == 0))
+		return TVOUT_1680X1050P_60HZ;
+	if ((strcmp(mode_name, "1920X1200") == 0) ||
+			(strcmp(mode_name, "1920x1200") == 0))
+		return TVOUT_1920X1200;
     
 	return TVOUT_MAX;
 }

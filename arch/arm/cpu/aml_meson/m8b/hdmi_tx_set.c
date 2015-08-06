@@ -989,6 +989,201 @@ static void hdmi_tvenc_set(HDMI_Video_Codes_t vic)
          VSYNC_LINES         =5;              
          SOF_LINES           =36;             
          TOTAL_FRAMES        =4;    
+    } else if (vic == HDMI_640x480p60) {
+	    INTERLACE_MODE      = 0;
+	    PIXEL_REPEAT_VENC   = 0;
+	    PIXEL_REPEAT_HDMI   = 0;
+	    ACTIVE_PIXELS       = 640;
+	    ACTIVE_LINES        = 480;
+	    LINES_F0            = 525;
+	    LINES_F1            = 525;
+	    FRONT_PORCH         = 16;
+	    HSYNC_PIXELS        = 96;
+	    BACK_PORCH          = 48;
+	    EOF_LINES           = 10;
+	    VSYNC_LINES         = 2;
+	    SOF_LINES           = 33;
+	    TOTAL_FRAMES        = 4;
+    } else if (vic == HDMI_800x480p60hz) {
+	    INTERLACE_MODE      = 0;
+	    PIXEL_REPEAT_VENC   = 0;
+	    PIXEL_REPEAT_HDMI   = 0;
+	    ACTIVE_PIXELS       = 800;
+	    ACTIVE_LINES        = 480;
+	    LINES_F0            = 500;
+	    LINES_F1            = 500;
+	    FRONT_PORCH         = 24;
+	    HSYNC_PIXELS        = 72;
+	    BACK_PORCH          = 96;
+	    EOF_LINES           = 3;
+	    VSYNC_LINES         = 7;
+	    SOF_LINES           = 10;
+	    TOTAL_FRAMES        = 4;
+    } else if (vic == HDMI_800x600p60hz) {
+	    INTERLACE_MODE      = 0;
+	    PIXEL_REPEAT_VENC   = 0;
+	    PIXEL_REPEAT_HDMI   = 0;
+	    ACTIVE_PIXELS       = 800;
+	    ACTIVE_LINES        = 600;
+	    LINES_F0            = 628;
+	    LINES_F1            = 628;
+	    FRONT_PORCH         = 40;
+	    HSYNC_PIXELS        = 128;
+	    BACK_PORCH          = 88;
+	    EOF_LINES           = 1;
+	    VSYNC_LINES         = 4;
+	    SOF_LINES           = 23;
+	    TOTAL_FRAMES        = 4;
+    } else if (vic == HDMI_1024x600p60hz) {
+	    INTERLACE_MODE      = 0;
+	    PIXEL_REPEAT_VENC   = 0;
+	    PIXEL_REPEAT_HDMI   = 0;
+	    ACTIVE_PIXELS       = 1024;
+	    ACTIVE_LINES        = 600;
+	    LINES_F0            = 638;
+	    LINES_F1            = 638;
+	    FRONT_PORCH         = 24;
+	    HSYNC_PIXELS        = 136;
+	    BACK_PORCH          = 160;
+	    EOF_LINES           = 3;
+	    VSYNC_LINES         = 6;
+	    SOF_LINES           = 29;
+	    TOTAL_FRAMES        = 4;
+    } else if(vic == HDMI_1024x768p60hz) {
+	    INTERLACE_MODE      = 0;
+	    PIXEL_REPEAT_VENC   = 0;
+	    PIXEL_REPEAT_HDMI   = 0;
+	    ACTIVE_PIXELS       = 1024;
+	    ACTIVE_LINES        = 768;
+	    LINES_F0            = 806;
+	    LINES_F1            = 806;
+	    FRONT_PORCH         = 24;
+	    HSYNC_PIXELS        = 136;
+	    BACK_PORCH          = 160;
+	    EOF_LINES           = 3;
+	    VSYNC_LINES         = 6;
+	    SOF_LINES           = 29;
+	    TOTAL_FRAMES        = 4;
+    } else if (vic == HDMI_1280x800) {
+	    INTERLACE_MODE      = 0;
+	    PIXEL_REPEAT_VENC   = 0;
+	    PIXEL_REPEAT_HDMI   = 0;
+	    ACTIVE_PIXELS       = 1280;
+	    ACTIVE_LINES        = 800;
+	    LINES_F0            = 823;
+	    LINES_F1            = 823;
+	    FRONT_PORCH	        = 48;
+	    HSYNC_PIXELS        = 32;
+	    BACK_PORCH          = 80;
+	    EOF_LINES           = 3;
+	    VSYNC_LINES         = 6;
+	    SOF_LINES           = 14;
+	    TOTAL_FRAMES        = 4;
+    } else if(vic==HDMI_1280x1024p60hz){
+	    INTERLACE_MODE      = 0;
+	    PIXEL_REPEAT_VENC   = 0;
+	    PIXEL_REPEAT_HDMI   = 0;
+	    ACTIVE_PIXELS       = 1280;
+	    ACTIVE_LINES        = 1024;
+	    LINES_F0            = 1066;
+	    LINES_F1            = 1066;
+	    FRONT_PORCH         = 48;
+	    HSYNC_PIXELS        = 112;
+	    BACK_PORCH          = 248;
+	    EOF_LINES           = 1;
+	    VSYNC_LINES         = 3;
+	    SOF_LINES           = 38;
+	    TOTAL_FRAMES        = 4;
+    } else if (vic == HDMI_1360x768p60hz) {
+	    INTERLACE_MODE      = 0;
+	    PIXEL_REPEAT_VENC   = 0;
+	    PIXEL_REPEAT_HDMI   = 0;
+	    ACTIVE_PIXELS       = 1360;
+	    ACTIVE_LINES        = 768;
+	    LINES_F0            = 795;
+	    LINES_F1            = 795;
+	    FRONT_PORCH         = 64;
+	    HSYNC_PIXELS        = 112;
+	    BACK_PORCH          = 256;
+	    EOF_LINES           = 3;
+	    VSYNC_LINES         = 6;
+	    SOF_LINES           = 18;
+	    TOTAL_FRAMES        = 4;
+    } else if (vic == HDMI_1366x768p60hz) {
+	    INTERLACE_MODE      = 0;
+	    PIXEL_REPEAT_VENC   = 0;
+	    PIXEL_REPEAT_HDMI   = 0;
+	    ACTIVE_PIXELS       = 1366;
+	    ACTIVE_LINES        = 768;
+	    LINES_F0            = 798;
+	    LINES_F1            = 798;
+	    FRONT_PORCH         = 70;
+	    HSYNC_PIXELS        = 143;
+	    BACK_PORCH          = 213;
+	    EOF_LINES           = 3;
+	    VSYNC_LINES         = 3;
+	    SOF_LINES           = 24;
+	    TOTAL_FRAMES        = 4;
+    } else if (vic == HDMI_1440x900p60hz) {
+	    INTERLACE_MODE      = 0;
+	    PIXEL_REPEAT_VENC   = 0;
+	    PIXEL_REPEAT_HDMI   = 0;
+	    ACTIVE_PIXELS       = 1440;
+	    ACTIVE_LINES        = 900;
+	    LINES_F0            = 934;
+	    LINES_F1            = 934;
+	    FRONT_PORCH         = 80;
+	    HSYNC_PIXELS        = 152;
+	    BACK_PORCH          = 232;
+	    EOF_LINES           = 3;
+	    VSYNC_LINES         = 6;
+	    SOF_LINES           = 25;
+	    TOTAL_FRAMES        = 4;
+    } else if (vic == HDMI_1600x900p60hz) {
+	    INTERLACE_MODE      = 0;
+	    PIXEL_REPEAT_VENC   = 0;
+	    PIXEL_REPEAT_HDMI   = 0;
+	    ACTIVE_PIXELS       = 1600;
+	    ACTIVE_LINES        = 900;
+	    LINES_F0            = 1800;
+	    LINES_F1            = 1800;
+	    FRONT_PORCH         = 24;
+	    HSYNC_PIXELS        = 80;
+	    BACK_PORCH          = 96;
+	    EOF_LINES           = 1;
+	    VSYNC_LINES         = 3;
+	    SOF_LINES           = 96;
+	    TOTAL_FRAMES        = 4;
+    } else if(vic == HDMI_1680x1050p60hz) {
+	    INTERLACE_MODE      = 0;
+	    PIXEL_REPEAT_VENC   = 0;
+	    PIXEL_REPEAT_HDMI   = 0;
+	    ACTIVE_PIXELS       = 1680;
+	    ACTIVE_LINES        = 1050;
+	    LINES_F0            = 1089;
+	    LINES_F1            = 1089;
+	    FRONT_PORCH         = 104;
+	    HSYNC_PIXELS        = 176;
+	    BACK_PORCH          = 280;
+	    EOF_LINES           = 3;
+	    VSYNC_LINES         = 6;
+	    SOF_LINES           = 30;
+	    TOTAL_FRAMES        = 4;
+    } else if (vic == HDMI_1920x1200) {
+	    INTERLACE_MODE      = 0;
+	    PIXEL_REPEAT_VENC   = 0;
+	    PIXEL_REPEAT_HDMI   = 0;
+	    ACTIVE_PIXELS       = 1920;
+	    ACTIVE_LINES        = 1200;
+	    LINES_F0            = 1235;
+	    LINES_F1            = 1235;
+	    FRONT_PORCH         = 48;
+	    HSYNC_PIXELS        = 32;
+	    BACK_PORCH          = 80;
+	    EOF_LINES           = 3;
+	    VSYNC_LINES         = 6;
+	    SOF_LINES           = 26;
+	    TOTAL_FRAMES        = 4;
     }
     else{ //HDMI_1080p60, HDMI_1080p30
          INTERLACE_MODE      =0;              
@@ -1127,6 +1322,19 @@ static void hdmi_tvenc_set(HDMI_Video_Codes_t vic)
                                  (0                                 <<12)   // [15:12] rd_rate. 0=A read every clk2; 1=A read every 2 clk2; ...; 15=A read every 16 clk2.
             );
             break;
+        case HDMI_640x480p60:
+        case HDMI_800x480p60hz:
+            aml_write_reg32(P_VPU_HDMI_SETTING, 2);
+            break;
+	case HDMI_800x600p60hz:
+	case HDMI_1024x600p60hz:
+	case HDMI_1024x768p60hz:
+	case HDMI_1360x768p60hz:
+	case HDMI_1366x768p60hz:
+	case HDMI_1440x900p60hz:
+	case HDMI_1600x900p60hz:
+	case HDMI_1680x1050p60hz:
+            aml_write_reg32(P_VPU_HDMI_SETTING, 0xe);
         default:
             // Annie 01Sep2011: Register VENC_DVI_SETTING and VENC_DVI_SETTING_MORE are no long valid, use VPU_HDMI_SETTING instead.
             aml_write_reg32_op(P_VPU_HDMI_SETTING, (0                                 << 0) | // [    0] src_sel_enci
