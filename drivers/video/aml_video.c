@@ -72,6 +72,44 @@ static void video_layer_init(GraphicDevice gdev)
  * video_hw_init --
  *-----------------------------------------------------------------------------
  */
+#if defined(CONFIG_MACH_MESON8_ODROIDC)
+void *video_hw_init (void)
+{
+	u32 fb_len;
+	int tvout;
+
+	tvout = board_graphic_device(&aml_gdev);
+	if (0 == tvout)
+		return NULL;
+
+	/* Clear the framebuffer */
+	fb_len = aml_gdev.winSizeX * aml_gdev.winSizeY * aml_gdev.gdfBytesPP;
+	memset ((char *)aml_gdev.frameAdrs, 0, fb_len);
+	flush_cache(aml_gdev.frameAdrs, fb_len);
+
+	/* Enforce to use OSD2 layer */
+        osd_init_hw();
+        osd_setup(0, 0, aml_gdev.fb_width, aml_gdev.fb_height,
+                        aml_gdev.fb_width, aml_gdev.fb_height * 2,
+                        0, 0,
+                        aml_gdev.fb_width - 1, aml_gdev.fb_height - 1,
+                        aml_gdev.frameAdrs,
+                        &default_color_format_array[COLOR_INDEX_32_ARGB],
+                        OSD2);
+
+	tv_oper.enable();
+
+	/* Initiate HDMI */
+	init_hdmi();
+
+	if (tv_out_open(tvout)) {
+		printf("Failed to initiate display\n");
+		return NULL;
+	}
+
+	return (void *)&aml_gdev;
+}
+#else
 void *video_hw_init (void)
 {	
 	u32 fb_addr, display_width, display_height, display_bpp, color_format_index, fg, bg;
@@ -136,6 +174,7 @@ void *video_hw_init (void)
 	return (void *) &aml_gdev;
 
 }
+#endif
 
 /*-----------------------------------------------------------------------------
  * video_set_lut --

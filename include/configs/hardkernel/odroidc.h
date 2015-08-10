@@ -158,8 +158,7 @@
         "initrd_high=60000000\0" \
         "loadaddr=" MK_STR(CONFIG_SYS_LOAD_ADDR) "\0" \
         "loadaddr_logo=0x14000000\0" \
-        "preloadlogo=logo size ${outputmode}; video open;" \
-                "video clear; video dev open ${outputmode};" \
+        "preloadlogo=logo size ${outputmode};" \
                 "movi read logo 0 ${loadaddr_logo};" \
                 "bmp display ${loadaddr_logo}; bmp scale\0" \
 	"stdin=serial\0" \
