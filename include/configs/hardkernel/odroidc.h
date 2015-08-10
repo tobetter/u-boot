@@ -162,6 +162,9 @@
                 "video clear; video dev open ${outputmode};" \
                 "movi read logo 0 ${loadaddr_logo};" \
                 "bmp display ${loadaddr_logo}; bmp scale\0" \
+	"stdin=serial\0" \
+	"stdout=serial,vga\0" \
+	"stderr=serial\0" \
         "vdac_config=0x10\0" \
         "video_dev=tvout\0"
 
