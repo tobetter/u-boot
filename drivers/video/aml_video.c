@@ -190,7 +190,7 @@ void video_set_lut (
 	return;
 }
 
-
+#if !defined(CONFIG_MACH_MESON8_ODROIDC)
 int video_display_bitmap(ulong bmp_image, int x, int y)
 {
     vidinfo_t * info = NULL;
@@ -404,6 +404,7 @@ int video_display_bitmap(ulong bmp_image, int x, int y)
 #endif
 	return (0);
 }
+#endif
 
 #ifdef CONFIG_OSD_SCALE_ENABLE
 int video_scale_bitmap(void)

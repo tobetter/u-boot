@@ -40,6 +40,19 @@
 #define CONFIG_AML_HDMI_TX              1
 #define CONFIG_OSD_SCALE_ENABLE         1
 
+#define CONFIG_CFB_CONSOLE		1
+#define CONFIG_CONSOLE_MUX		1
+#define CONFIG_SYS_CONSOLE_IS_IN_ENV	1
+#define CONFIG_VGA_AS_SINGLE_DEVICE	1
+#define CONFIG_VIDEO_LOGO               1
+#define CONFIG_VIDEO_BMP_LOGO           1
+#define CONFIG_VIDEO_BMP_RLE8           1
+
+#if defined(CONFIG_VIDEO_LOGO)
+#define CONFIG_SPLASH_SCREEN            1
+#define CONFIG_SPLASH_SCREEN_ALIGN      1
+#endif
+
 // Enable storage devices
 #define CONFIG_CMD_SF                   1
 #if defined(CONFIG_CMD_SF)
