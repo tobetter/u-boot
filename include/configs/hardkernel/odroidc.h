@@ -155,25 +155,12 @@
         "chipname=8726m8\0" \
         "console=" CONFIG_CONSOLE_PROTOCOL "\0" \
         "cvbsmode=480cvbs\0" \
-        "display_bpp=24\0" \
-        "display_color_bg=0\0" \
-        "display_color_fg=0xffff\0" \
-        "display_color_format_index=24\0" \
-        "display_width=1920\0" \
-        "display_height=1080\0" \
-        "display_layer=osd2\0" \
-        "fb_addr=0x7900000\0" \
-        "fb_width=1280\0"\
-        "fb_height=720\0"\
         "firstboot=1\0" \
         "outputmode=720p\0" \
         "hdmimode=720p\0" \
         "initrd_high=60000000\0" \
         "loadaddr=" MK_STR(CONFIG_SYS_LOAD_ADDR) "\0" \
         "loadaddr_logo=0x14000000\0" \
-        "preloadlogo=logo size ${outputmode};" \
-                "movi read logo 0 ${loadaddr_logo};" \
-                "bmp display ${loadaddr_logo}; bmp scale\0" \
 	"stdin=serial\0" \
 	"stdout=serial,vga\0" \
 	"stderr=serial\0" \
