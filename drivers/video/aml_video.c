@@ -84,7 +84,7 @@ void *video_hw_init (void)
 
 	/* Clear the framebuffer */
 	fb_len = aml_gdev.winSizeX * aml_gdev.winSizeY * aml_gdev.gdfBytesPP;
-	memset ((char *)aml_gdev.frameAdrs, 0, fb_len);
+	memset ((char *)aml_gdev.frameAdrs, 0xff000000, fb_len);
 	flush_cache(aml_gdev.frameAdrs, fb_len);
 
 	/* Enforce to use OSD2 layer */

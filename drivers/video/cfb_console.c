@@ -320,7 +320,11 @@ void	console_cursor (int state);
 			  (((x) & 0x00ff0000) <<  8) | (((x) & 0xff000000) >> 8) )
 #else
 #define SWAP16(x)	 (x)
+#if defined(CONFIG_MACH_MESON8_ODROIDC)
+#define SWAP32(x)	 ((x) | 0xff000000)
+#else
 #define SWAP32(x)	 (x)
+#endif
 #if defined(VIDEO_FB_16BPP_WORD_SWAP)
 #define SHORTSWAP32(x)	 ( ((x) >> 16) | ((x) << 16) )
 #else
@@ -489,6 +493,9 @@ static void video_drawchars (int xx, int yy, unsigned char *s, int count)
 				((u32 *) dest)[5] = SWAP32 ((video_font_draw_table32 [bits & 15][1] & eorx) ^ bgx);
 				((u32 *) dest)[6] = SWAP32 ((video_font_draw_table32 [bits & 15][2] & eorx) ^ bgx);
 				((u32 *) dest)[7] = SWAP32 ((video_font_draw_table32 [bits & 15][3] & eorx) ^ bgx);
+#if defined(CONFIG_MACH_MESON8_ODROIDC)
+                                flush_cache(dest, 8 * VIDEO_PIXEL_SIZE);
+#endif
 			}
 			dest0 += VIDEO_FONT_WIDTH * VIDEO_PIXEL_SIZE;
 			s++;
@@ -596,21 +603,47 @@ void console_cursor (int state)
 /*****************************************************************************/
 
 #ifndef VIDEO_HW_RECTFILL
+#if !defined(CONFIG_MACH_MESON8_ODROIDC)
 static void memsetl (int *p, int c, int v)
 {
 	while (c--)
 		*(p++) = v;
 }
+#else
+static void memsetl (int *p, int c, int v)
+{
+        int *dest = p;
+        int len = c;
+
+	while (c--)
+		*(p++) = (v | 0xff000000);
+
+        flush_cache(dest, c);
+}
+#endif
 #endif
 
 /*****************************************************************************/
 
 #ifndef VIDEO_HW_BITBLT
+#if !defined(CONFIG_MACH_MESON8_ODROIDC)
 static void memcpyl (int *d, int *s, int c)
 {
 	while (c--)
 		*(d++) = *(s++);
 }
+#else
+static void memcpyl (int *d, int *s, int c)
+{
+        int *dest = d;
+        int len = c;
+
+	while (c--)
+		*(d++) = (*(s++) | 0xff000000);
+
+        flush_cache(dest, c);
+}
+#endif
 #endif
 
 /*****************************************************************************/
@@ -1417,6 +1450,9 @@ void logo_plot (void *screen, int width, int x, int y)
 			case GDF_32BIT_X888RGB:
 				*(unsigned long *) dest =
 					SWAP32 ((unsigned long) ((r << 16) | (g << 8) | b));
+#if defined(CONFIG_MACH_MESON8_ODROIDC)
+                                flush_cache(dest, sizeof(unsigned long));
+#endif
 				break;
 			case GDF_24BIT_888RGB:
 #ifdef VIDEO_FB_LITTLE_ENDIAN
