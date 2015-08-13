@@ -167,3 +167,23 @@ int board_graphic_device(GraphicDevice *dev)
 	return vmode->tvout;
 }
 #endif
+
+#if defined(CONFIG_CONSOLE_EXTRA_INFO)
+void video_get_info_str(int line_number, char *info)
+{
+        *info = NULL;
+
+        switch (line_number) {
+        case 1: sprintf(info, " BOARD: ODROID-C1");
+                break;
+        case 2: sprintf(info, " S/N  : %s", getenv("fbt_id#"));
+                break;
+        case 3: sprintf(info, " MAC  : %s", getenv("ethaddr"));
+                break;
+        case 4: if (vmode) {
+                        sprintf(info, " VIDEO: %dx%d %dHz",
+                                        vmode->xres, vmode->yres, vmode->vfreq);
+                }
+        }
+}
+#endif
