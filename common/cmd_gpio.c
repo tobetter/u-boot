@@ -4,7 +4,9 @@
 #include <command.h>
 #include <malloc.h>
 #include <amlogic/gpio.h>
+#if defined(CONFIG_GPIO_DEBUG)
 extern int gpio_debug;
+#endif
 int do_gpio(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
 	int pin,val;
@@ -12,10 +14,12 @@ int do_gpio(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 	for(i=0;i<argc;i++)
 		printf("%s\n",argv[i]);
 	printf("argc=%d\n",argc);
+#if defined(CONFIG_GPIO_DEBUG)
 	if(!strcmp(argv[1],"debug")){
 		gpio_debug=simple_strtoul(argv[2], NULL, 16);;
 		return 0;
 	}
+#endif
 	pin=gpioname_to_pin(argv[1]);
 	if(pin<0){
 		printf("wrong gpio number %s\n",argv[1]);
