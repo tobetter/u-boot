@@ -168,6 +168,36 @@ int board_graphic_device(GraphicDevice *dev)
 
 	return vmode->tvout;
 }
+
+int board_video_skip()
+{
+        int splash;
+
+        /* Video init could be skipped if HDMI cable is not attached on boot */
+	if (!hdmi_isconnected())
+                return 1;
+
+        /* Read splash image from FAT partiton, it must be 'bootsplash.bmp' as
+         * a file. If failed try to read from raw sectors of 'logo' partition.
+         */
+        splash = run_command("fatload mmc 0:1 ${loadaddr_logo} bootsplash.bmp", 0);
+        if (splash != 0) {
+                /* Load boot splash bitmap image from storage */
+                splash = run_command("movi read logo 0 ${loadaddr_logo}", 0);
+        }
+
+        /* Splash image is loaded to memory */
+        if (splash == 0) {
+                setenv("splashimage", getenv("loadaddr_logo"));
+
+#ifdef CONFIG_SPLASH_SCREEN_ALIGN
+                /* Let position the splash image at center of display */
+                setenv("splashpos", "m,m");
+#endif
+        }
+
+        return 0;
+}
 #endif
 
 #if defined(CONFIG_CONSOLE_EXTRA_INFO)
