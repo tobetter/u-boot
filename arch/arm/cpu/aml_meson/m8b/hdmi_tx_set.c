@@ -1511,7 +1511,6 @@ static void hdmi_reconfig_packet_setting(HDMI_Video_Codes_t vic)
     default:
         break;
     }
-    printf("reconfig packet setting done\n");
 }
 
 void hdmi_tx_set(HDMI_Video_Codes_t vic) 
@@ -1519,7 +1518,6 @@ void hdmi_tx_set(HDMI_Video_Codes_t vic)
 	// reset SD 4:3 to 16:9 formats
 	if((vic == HDMI_480p60) || (vic == HDMI_480i60) || (vic == HDMI_576p50) || (vic == HDMI_576i50))
 		vic ++;
-	printf("set HDMI vic: %d\n", vic);
 
     if((vic >= HDMI_4k2k_30) && (vic <= HDMI_4k2k_smpte)) {
         printf("Not supported HDMI mode: %d\n", vic);

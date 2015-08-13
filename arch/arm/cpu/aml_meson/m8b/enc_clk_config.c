@@ -50,7 +50,6 @@
 
 static void set_hpll_clk_out(unsigned clk)
 {
-    printf("config HPLL\n");
     aml_write_reg32_op(P_HHI_VID_PLL_CNTL2, 0x69c88000);
     aml_write_reg32_op(P_HHI_VID_PLL_CNTL3, 0xca563823);
     aml_write_reg32_op(P_HHI_VID_PLL_CNTL4, 0x40238100);
@@ -228,7 +227,6 @@ static void set_hpll_clk_out(unsigned clk)
     RESET_HDMI_PHY();
     RESET_HDMI_PHY();
     RESET_HDMI_PHY();
-    printf("config HPLL done\n");
 }
 
 static void set_hpll_hdmi_od(unsigned div)
@@ -284,12 +282,10 @@ int set_viu_path(unsigned viu_channel_sel, viu_type_e viu_type_sel)
 
     if(viu_channel_sel == 1){
         aml_set_reg32_bits_op(P_VPU_VIU_VENC_MUX_CTRL, viu_type_sel, 0, 2);
-        printf("viu chan = 1\n");
     }
     else{
         //viu_channel_sel ==2
         aml_set_reg32_bits_op(P_VPU_VIU_VENC_MUX_CTRL, viu_type_sel, 2, 2);
-        printf("viu chan = 2\n");
     }
     return 0;
 }
@@ -417,7 +413,6 @@ void set_vmode_clk(vmode_t mode)
     int i = sizeof(setting_enc_clk_val) / sizeof(enc_clk_val_t);
     int j = 0;
     
-    printf("mode is: %d\n", mode);
     for (j = 0; j < i; j++){
         if(mode == p_enc[j].mode)
             break;

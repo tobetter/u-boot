@@ -110,7 +110,6 @@ int set_disp_mode(int mode)
         return 0;
     }
     vic = tvmode_to_vic(mode);
-    printf("mode = %d  vic = %d\n", mode, vic);
     hdmi_tx_set(vic);
     return 1;
 }    

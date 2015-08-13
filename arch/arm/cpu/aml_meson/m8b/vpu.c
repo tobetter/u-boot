@@ -114,7 +114,9 @@ static int set_vpu_clk(unsigned int vclk)
 	
 	writel(((1 << 8) | (vpu_clk_setting[clk_level][1] << 9) | (vpu_clk_setting[clk_level][2] << 0)), P_HHI_VPU_CLK_CNTL);
 	vpu_config.clk_level = clk_level;
+#if !defined(CONFIG_MACH_MESON8_ODROIDC)
 	printf("set vpu clk: %uHz, readback: %uHz(0x%x)\n", vpu_clk_setting[clk_level][0], get_vpu_clk(), (readl(P_HHI_VPU_CLK_CNTL)));
+#endif
 
 	return ret;
 }
@@ -191,7 +193,9 @@ static int get_vpu_config(void)
 	}
 	else {
 		vpu_config.clk_level = CLK_LEVEL_DFT;
+#if !defined(CONFIG_MACH_MESON8_ODROIDC)
 		printf("vpu clk_level = %u\n", vpu_config.clk_level);
+#endif
 	}
 	return ret;
 }
