@@ -770,10 +770,12 @@ unsigned int before_nand_init =  get_utimer(0);
 
 	AML_LOG_TE("board");
 
+#if !defined(CONFIG_MACH_MESON8_ODROIDC)
 #ifdef CONFIG_LOGO_PRELOAD
         if ((s = getenv ("preloadlogo")) != NULL) {
                 run_command(s, 0);
         }
+#endif
 #endif
 
 #if defined(CONFIG_API)
