@@ -93,6 +93,7 @@ static char* outputmode_by_edid(void)
 	int i;
 	struct vmode *vmode;
 
+        puts("VIDEO: ");
 	if (i2c_read(0x50, 0, 1, (uchar *)&edid, sizeof(edid)) != 0) {
 		puts("Error reading EDID content.\n");
 		return NULL;
@@ -129,11 +130,12 @@ static char* outputmode_by_edid(void)
 			}
 			x = (xres + 31) * 8;
 			y = x * aspect / 10000;
-			printf("\t%dx%d%c\t%d Hz\n", x, y,
-			       x > 1000 ? ' ' : '\t', (vfreq & 0x3f) + 60);
 			vmode = get_best_vmode(x, y, (vfreq & 0x3f) + 60);
-			if (vmode)
+			if (vmode) {
+                                printf("%dx%d%c %d Hz is detected\n", x, y,
+                                                x > 1000 ? ' ' : '\t', (vfreq & 0x3f) + 60);
 				return vmode;
+                        }
 		}
 	}
 
