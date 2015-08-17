@@ -150,6 +150,7 @@ int board_graphic_device(GraphicDevice *dev)
 	if (hdmi_isconnected()) {
 #if defined(CONFIG_I2C_EDID)
 		vmode = outputmode_by_edid();
+		setenv("outputmode", vmode->mode);
 #endif
 	}
 
