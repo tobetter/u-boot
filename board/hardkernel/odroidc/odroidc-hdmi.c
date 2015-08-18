@@ -69,40 +69,12 @@ static struct vmode vmodes[] = {
 	{  640,  480, 60,  640,  480, "640x480p60hz", TVOUT_640X480P_60HZ },
 };
 
-static struct vmode* get_best_vmode(int xres, int yres, int vfreq)
-{
-	int i;
-	struct vmode *res;
-
-	for (i = 0; i < sizeof(vmodes) / sizeof(vmodes[0]); i++) {
-		res = &vmodes[i];
-		if ((res->xres == xres) && (res->yres == yres) &&
-				(res->vfreq == vfreq)) {
-			return res;
-		}
-	}
-
-	return NULL;
-}
-
 #if defined(CONFIG_I2C_EDID)
 static struct edid1_info edid;
 
-static char* outputmode_by_edid(void)
+static int bestmode(const struct vmode *vmode)
 {
 	int i;
-	struct vmode *vmode;
-
-        puts("VIDEO: ");
-	if (i2c_read(0x50, 0, 1, (uchar *)&edid, sizeof(edid)) != 0) {
-		puts("Error reading EDID content.\n");
-		return NULL;
-	}
-
-	if (edid_check_info(&edid)) {
-		puts("Content isn't valid EDID.\n");
-		return NULL;
-	}
 
 	for (i = 0; i < ARRAY_SIZE(edid.standard_timings); i++) {
 		unsigned int aspect = 10000;
@@ -130,14 +102,42 @@ static char* outputmode_by_edid(void)
 			}
 			x = (xres + 31) * 8;
 			y = x * aspect / 10000;
-			vmode = get_best_vmode(x, y, (vfreq & 0x3f) + 60);
-			if (vmode) {
-                                printf("%dx%d%c %d Hz is detected\n", x, y,
-                                                x > 1000 ? ' ' : '\t', (vfreq & 0x3f) + 60);
-				return vmode;
+                        if ((x == vmode->xres) && (y == vmode->yres) &&
+                                        ((vfreq & 0x3f) + 60) == vmode->vfreq) {
+                                return 1;
                         }
 		}
 	}
+
+	return 0;
+}
+
+static struct vmode* outputmode_by_edid(void)
+{
+	int i;
+	struct vmode *vmode;
+
+        puts("VIDEO: ");
+	if (i2c_read(0x50, 0, 1, (uchar *)&edid, sizeof(edid)) != 0) {
+		puts("Error reading EDID content.\n");
+		return NULL;
+	}
+
+	if (edid_check_info(&edid)) {
+		puts("Content isn't valid EDID.\n");
+		return NULL;
+	}
+
+	for (i = 0; i < sizeof(vmodes) / sizeof(vmodes[0]); i++) {
+                vmode = &vmodes[i];
+                if (bestmode(vmode)) {
+                        printf("%dx%d%c %d Hz is detected\n",
+                                        vmode->xres, vmode->yres,
+                                        vmode->xres > 1000 ? ' ' : '\t',
+                                        vmode->vfreq);
+                        return vmode;
+                }
+        }
 
 	return NULL;
 }
