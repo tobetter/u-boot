@@ -154,6 +154,7 @@
         "bootsize=100000\0" \
         "bootstart=0\0" \
         "chipname=8726m8\0" \
+        "cecconfig=cecf\0" \
         "console=" CONFIG_CONSOLE_PROTOCOL "\0" \
         "cvbsmode=480cvbs\0" \
         "firstboot=1\0" \
