@@ -187,14 +187,22 @@ int board_video_skip()
                 splash = run_command("movi read logo 0 ${loadaddr_logo}", 0);
         }
 
-        /* Splash image is loaded to memory */
         if (splash == 0) {
-                setenv("splashimage", getenv("loadaddr_logo"));
+                splash = run_command("bmp info ${loadaddr_logo}", 0);
+                /* Splash image is loaded to memory */
+                if (splash == 0) {
+                        setenv("splashimage", getenv("loadaddr_logo"));
 
 #ifdef CONFIG_SPLASH_SCREEN_ALIGN
-                /* Let position the splash image at center of display */
-                setenv("splashpos", "m,m");
+                        /* Let position the splash image at center of display */
+                        setenv("splashpos", "m,m");
 #endif
+                } else {
+                        setenv("splashimage", NULL);
+#ifdef CONFIG_SPLASH_SCREEN_ALIGN
+                        setenv("splashpos", NULL);
+#endif
+                }
         }
 
         return 0;
