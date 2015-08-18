@@ -43,7 +43,6 @@
 #define CONFIG_CFB_CONSOLE		1
 #define CONFIG_CONSOLE_MUX		1
 #define CONFIG_CONSOLE_EXTRA_INFO       1
-#define CONFIG_SYS_CONSOLE_IS_IN_ENV	1
 #define CONFIG_VGA_AS_SINGLE_DEVICE	1
 #define CONFIG_VIDEO_LOGO               1
 #define CONFIG_VIDEO_BMP_LOGO           1
@@ -163,9 +162,6 @@
         "initrd_high=60000000\0" \
         "loadaddr=" MK_STR(CONFIG_SYS_LOAD_ADDR) "\0" \
         "loadaddr_logo=0x14000000\0" \
-	"stdin=serial\0" \
-	"stdout=serial,vga\0" \
-	"stderr=serial\0" \
         "vdac_config=0x10\0" \
         "video_dev=tvout\0"
 
