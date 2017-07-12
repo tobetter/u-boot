@@ -602,4 +602,9 @@ int mmc_get_env_dev(void);
  */
 struct blk_desc *mmc_get_blk_desc(struct mmc *mmc);
 
+#ifdef CONFIG_SUPPORT_EMMC_BOOT
+int emmc_boot_open(struct mmc *mmc);
+int emmc_boot_close(struct mmc *mmc);
+#endif
+
 #endif /* _MMC_H_ */
