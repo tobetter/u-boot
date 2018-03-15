@@ -64,6 +64,7 @@ patches-*
 # quilt's files
 patches
 series
+!/debian/patches/
 
 # gdb files
 .gdb_history

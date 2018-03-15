@@ -1,0 +1,56 @@
+
+# There are no file conflicts across architectures for u-boot, as each
+# target is only installed on a single architecture. In theory, some
+# targets could be built on multiple architectures, but could instead install
+# the package for the architecture needed.
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/A10-OLinuXino-Lime/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/A10s-OLinuXino-M/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/A20-Olimex-SOM-EVB/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/A20-OLinuXino-Lime/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/A20-OLinuXino-Lime2/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/A20-OLinuXino_MICRO/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/Bananapi/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/Bananapro/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/CHIP/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/Cubieboard/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/Cubieboard2/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/Cubieboard4/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/Cubietruck/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/Cubietruck_plus/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/Lamobo_R1/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/Linksprite_pcDuino/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/Linksprite_pcDuino3/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/Mini-X/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/nanopi_neo/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/orangepi_plus/uboot.elf
+u-boot-sunxi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/orangepi_zero/uboot.elf
+u-boot-sunxi [arm64]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/pine64_plus/uboot.elf
+
+# These bootloaders need to be statically linked.
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/A10-OLinuXino-Lime/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/A10s-OLinuXino-M/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/A20-Olimex-SOM-EVB/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/A20-OLinuXino-Lime/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/A20-OLinuXino-Lime2/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/A20-OLinuXino_MICRO/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/Bananapi/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/Bananapro/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/CHIP/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/Cubieboard/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/Cubieboard2/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/Cubieboard4/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/Cubietruck/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/Cubietruck_plus/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/Lamobo_R1/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/Linksprite_pcDuino/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/Linksprite_pcDuino3/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/Mini-X/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/nanopi_neo/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/orangepi_plus/uboot.elf
+u-boot-sunxi [armhf]: statically-linked-binary usr/lib/u-boot/orangepi_zero/uboot.elf
+u-boot-sunxi [arm64]: statically-linked-binary usr/lib/u-boot/pine64_plus/uboot.elf
+
+u-boot-sunxi: description-synopsis-starts-with-article
+
+# Synopsys is the name of a company, not a misspelling.
+u-boot-sunxi: spelling-error-in-copyright Synopsys Synopsis

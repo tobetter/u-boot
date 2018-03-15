@@ -1,0 +1,22 @@
+Index: u-boot/include/compiler.h
+===================================================================
+--- u-boot.orig/include/compiler.h
++++ u-boot/include/compiler.h
+@@ -15,7 +15,7 @@
+     defined(__sun__)	 || \
+     defined(__APPLE__)
+ # include <inttypes.h>
+-#elif defined(__linux__) || defined(__WIN32__) || defined(__MINGW32__) || defined(__OpenBSD__)
++#elif defined(__linux__) || defined(__WIN32__) || defined(__MINGW32__) || defined(__OpenBSD__) || defined(__GLIBC__)
+ # include <stdint.h>
+ #endif
+ 
+@@ -41,7 +41,7 @@
+ #define O_BINARY	0
+ #endif
+ 
+-#ifdef __linux__
++#if defined(__linux__) || defined(__GLIBC__)
+ # include <endian.h>
+ # include <byteswap.h>
+ #elif defined(__MACH__) || defined(__FreeBSD__)

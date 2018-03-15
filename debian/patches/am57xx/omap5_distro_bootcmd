@@ -1,0 +1,58 @@
+Index: u-boot/include/configs/ti_omap5_common.h
+===================================================================
+--- u-boot.orig/include/configs/ti_omap5_common.h
++++ u-boot/include/configs/ti_omap5_common.h
+@@ -58,6 +58,21 @@
+ #include <environment/ti/boot.h>
+ #include <environment/ti/mmc.h>
+ 
++#define BOOT_TARGET_DEVICES(func) \
++	func(MMC, mmc, 0) \
++	func(MMC, mmc, 1) \
++	func(PXE, pxe, na) \
++	func(DHCP, dhcp, na)
++
++#ifdef CONFIG_BOOTCOMMAND
++#undef CONFIG_BOOTCOMMAND
++#endif
++#define CONFIG_BOOTCOMMAND \
++	"run findfdt; " \
++	"run distro_bootcmd"
++
++#include <config_distro_bootcmd.h>
++
+ #define CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
+ #define CONFIG_EXTRA_ENV_SETTINGS \
+ 	DEFAULT_LINUX_BOOT_ENV \
+@@ -67,6 +82,7 @@
+ 	DEFAULT_FDT_TI_ARGS \
+ 	DFUARGS \
+ 	NETARGS \
++	BOOTENV \
+ 
+ /*
+  * SPL related defines.  The Public RAM memory map the ROM defines the
+Index: u-boot/configs/am57xx_evm_defconfig
+===================================================================
+--- u-boot.orig/configs/am57xx_evm_defconfig
++++ u-boot/configs/am57xx_evm_defconfig
+@@ -9,6 +9,7 @@ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+ CONFIG_SPL_SPI_SUPPORT=y
+ CONFIG_ARMV7_LPAE=y
+ CONFIG_DEFAULT_DEVICE_TREE="am572x-idk"
++CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_OF_BOARD_SETUP=y
+ CONFIG_USE_BOOTARGS=y
+Index: u-boot/configs/dra7xx_evm_defconfig
+===================================================================
+--- u-boot.orig/configs/dra7xx_evm_defconfig
++++ u-boot/configs/dra7xx_evm_defconfig
+@@ -9,6 +9,7 @@ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+ CONFIG_SPL_SPI_SUPPORT=y
+ CONFIG_ARMV7_LPAE=y
+ CONFIG_DEFAULT_DEVICE_TREE="dra7-evm"
++CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_OF_BOARD_SETUP=y
+ CONFIG_USE_BOOTARGS=y

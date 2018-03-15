@@ -1,0 +1,31 @@
+=== DragonBoard 410c ===
+
+You can use fastboot (from the android-tools-fastboot package) to
+boot U-Boot or flash U-Boot on your DragonBoard 410c.  Connect your
+PC via a USB cable to the micro-USB port on the DragonBoard.  Hold
+the volume down (-) button (S4) and turn on the device to go into
+fastboot mode.
+
+You have two options: you can load U-Boot without flashing it (for
+example to test U-Boot) or you can flash it to the device.
+
+In order to load U-Boot without flashing it, run this command:
+
+    fastboot boot /usr/lib/u-boot/dragonboard410c/u-boot.img
+
+In order to flash U-Boot to the boot partition, run:
+
+    fastboot flash boot /usr/lib/u-boot/dragonboard410c/u-boot.img
+
+You have to reset your device after "fastboot flash boot" to start
+U-Boot.
+
+When U-Boot starts, it will try to boot from attached devices in
+the following order:
+
+* USB
+* External SD card
+* Internal SD card (eMMC)
+
+At the moment, there's no graphics support, so you will only see the
+U-Boot output if you have the optional serial console adapter.

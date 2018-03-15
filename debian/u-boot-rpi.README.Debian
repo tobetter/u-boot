@@ -1,0 +1,16 @@
+== Installation ==
+
+The raspberry pi targets can be installed by copying u-boot.bin to the
+FAT partition of the raspberry pi boot firmware:
+
+  mkdir -p /boot/fat
+  mount /dev/mmcblk0p1 /boot/fat
+  cp -vb /usr/lib/u-boot/TARGET/u-boot.bin /boot/fat/
+
+Then specify the u-boot.bin as the kernel to load in config.txt on the
+FAT partition:
+
+  kernel u-boot.bin
+
+It should then support booting off of MMC and USB devices with serial
+console or HDMI with USB keyboard.

@@ -1,0 +1,28 @@
+
+# There are no file conflicts across architectures for u-boot, as each
+# target is only installed on a single architecture. In theory, some
+# targets could be built on multiple architectures, but could instead install
+# the package for the architecture needed.
+u-boot-omap [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/am335x_boneblack/uboot.elf
+u-boot-omap [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/am57xx_evm/uboot.elf
+u-boot-omap [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/dra7xx_evm/uboot.elf
+u-boot-omap [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/igep00x0/uboot.elf
+u-boot-omap [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/nokia_rx51/uboot.elf
+u-boot-omap [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/omap3_beagle/uboot.elf
+u-boot-omap [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/omap3_pandora/uboot.elf
+u-boot-omap [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/omap4_panda/uboot.elf
+
+# These bootloaders need to be statically linked.
+u-boot-omap [armhf]: statically-linked-binary usr/lib/u-boot/am335x_boneblack/uboot.elf
+u-boot-omap [armhf]: statically-linked-binary usr/lib/u-boot/am57xx_evm/uboot.elf
+u-boot-omap [armhf]: statically-linked-binary usr/lib/u-boot/dra7xx_evm/uboot.elf
+u-boot-omap [armhf]: statically-linked-binary usr/lib/u-boot/igep00x0/uboot.elf
+u-boot-omap [armhf]: statically-linked-binary usr/lib/u-boot/nokia_rx51/uboot.elf
+u-boot-omap [armhf]: statically-linked-binary usr/lib/u-boot/omap3_beagle/uboot.elf
+u-boot-omap [armhf]: statically-linked-binary usr/lib/u-boot/omap3_pandora/uboot.elf
+u-boot-omap [armhf]: statically-linked-binary usr/lib/u-boot/omap4_panda/uboot.elf
+
+u-boot-omap: description-synopsis-starts-with-article
+
+# Synopsys is the name of a company, not a misspelling.
+u-boot-omap: spelling-error-in-copyright Synopsys Synopsis

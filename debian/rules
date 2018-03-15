@@ -1,0 +1,116 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/architecture.mk
+include /usr/share/dpkg/pkg-info.mk
+export DEBIAN_REVISION ?= $(shell echo $(DEB_VERSION) | sed -e 's,.*+dfsg,+dfsg,')
+
+ifneq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
+export CROSS_COMPILE ?= $(DEB_HOST_GNU_TYPE)-
+cross_build_tools ?= y
+endif
+
+# support parallel build using DEB_BUILD_OPTIONS=parallel=N
+ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+  DEB_UBOOT_FLAGS += -j$(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+endif
+
+# the upstream build passes LDFLAGS directly to ld instead of calling gcc for
+# linking; so instead of passing -Wl,foo in LDFLAGS as in automake builds, one
+# should set LDFLAGS to foo directly
+comma := ,
+LDFLAGS := $(patsubst -Wl$(comma)%,%,$(LDFLAGS))
+
+%:
+	dh $@ --parallel
+
+override_dh_auto_build: TOOLSDIR := debian/build/tools
+override_dh_auto_build:
+	set -e; sed -n 's/^$(DEB_HOST_ARCH)[[:space:]]\+//p' debian/targets \
+	    | while read subarch platform targets; do \
+	        builddir=debian/build/$$platform; \
+		case $$platform in \
+			mx6cuboxi4x4) \
+				cp configs/mx6cuboxi_defconfig configs/mx6cuboxi4x4_defconfig;\
+				echo CONFIG_I4X4_RAM=y >> configs/mx6cuboxi4x4;\
+				targets="$$targets" ;\
+				maketargets="$$targets" ;\
+				;; \
+			*) \
+				targets="$$targets uboot.elf" ;\
+				maketargets="all" ;\
+				;; \
+		esac; \
+		mkdir -p $$builddir; \
+		$(MAKE) O=$$builddir $${platform}_defconfig; \
+		$(MAKE) $(DEB_UBOOT_FLAGS) O=$$builddir $${maketargets}; \
+		case "$$targets" in \
+			*uboot.elf*) \
+				install -m 644 $$builddir/u-boot $$builddir/uboot.elf; \
+				$(CROSS_COMPILE)strip --remove-section=.comment \
+					$$builddir/uboot.elf; \
+				;; \
+		esac; \
+		for target in $$targets; do \
+			chmod -x $$builddir/$$target; \
+			echo $$builddir/$$target /usr/lib/u-boot/$$platform/ \
+				>> debian/build/targets.$$subarch; \
+			echo $$platform >> debian/build/platforms.$$subarch; \
+		done ; \
+	        case $${subarch} in \
+		rockchip) \
+			debian/bin/generate-rksd $$builddir $$platform $$subarch; \
+			;; \
+		qcom) \
+			touch $$builddir/rd; \
+			skales-dtbtool -o $$builddir/dt.img $$builddir/arch/arm/dts; \
+			skales-mkbootimg --kernel $$builddir/u-boot-dtb.bin \
+				--output=$$builddir/u-boot.img --dt=$$builddir/dt.img \
+				--pagesize 2048 --base 0x80000000 \
+				--ramdisk=$$builddir/rd --cmdline=""; \
+			echo $$builddir/u-boot.img /usr/lib/u-boot/$$platform/ \
+				>> debian/build/targets.$$subarch; \
+			;; \
+	        esac; \
+	done
+
+	# Load dummy config
+	touch configs/tools_defconfig
+	$(MAKE) O=$(TOOLSDIR) CROSS_COMPILE=$(CROSS_COMPILE) tools_defconfig
+	# board-independent tools
+	$(MAKE) O=$(TOOLSDIR) $(DEB_UBOOT_FLAGS) \
+		CROSS_COMPILE=$(CROSS_COMPILE) \
+		CROSS_BUILD_TOOLS=$(cross_build_tools) \
+		NO_SDL=1 \
+	    tools-only
+	$(MAKE) O=$(TOOLSDIR) $(DEB_UBOOT_FLAGS) \
+		CROSS_COMPILE=$(CROSS_COMPILE) \
+		NO_SDL=1 \
+	    envtools
+	$(CROSS_COMPILE)strip --remove-section=.comment $(TOOLSDIR)/tools/env/fw_printenv
+	$(CROSS_COMPILE)strip --remove-section=.comment $(TOOLSDIR)/tools/mkimage
+	$(CROSS_COMPILE)strip --remove-section=.comment $(TOOLSDIR)/tools/mkenvimage
+	$(CROSS_COMPILE)strip --remove-section=.comment $(TOOLSDIR)/tools/kwboot
+	$(CROSS_COMPILE)strip --remove-section=.comment $(TOOLSDIR)/tools/mksunxiboot
+	$(CROSS_COMPILE)strip --remove-section=.comment $(TOOLSDIR)/tools/dumpimage
+
+override_dh_auto_test:
+ifeq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
+	# only run tests on native builds
+	BASEDIR=debian/build/tools test/image/test-imagetools.sh
+endif
+
+override_dh_clean:
+	rm -rf debian/build/
+	rm -f configs/mx6cuboxi4x4_defconfig configs/tools_defconfig
+	dh_clean
+
+override_dh_gencontrol:
+	debian/bin/update-substvars
+	dh_gencontrol
+
+get-orig-source:
+	# Use uscan from the devscripts package to download new
+	# tarball, remove files incompatible with the DFSG (see
+	# Files-Excluded in debian/copyright), and repack with xz
+	# compression.
+	uscan --download --repack --compression=xz

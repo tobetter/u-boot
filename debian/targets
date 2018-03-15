@@ -1,0 +1,194 @@
+# ARCH	subarch		platform	target
+# --------------------------------------------
+armel	-		dockstar	u-boot.kwb
+
+# Ian Campbell <ijc@debian.org>
+armel	-		dreamplug	u-boot.kwb
+
+# drEagle <drEagle@doukki.net>
+armel	-		guruplug	u-boot.kwb
+
+# Albert ARIBAUD <albert.u.boot@aribaud.net>
+armel  -        openrd_base u-boot.kwb
+
+# Rick Thomas <rbthomas@rcthomas.org>
+# Albert ARIBAUD <albert.u.boot@aribaud.net>
+armel  -        openrd_client u-boot.kwb
+
+# Rick Thomas <rbthomas@rcthomas.org>
+# Philip Hands <phil@hands.com>
+armel  -        openrd_ultimate u-boot.kwb
+
+# Vagrant Cascadian <vagrant@debian.org>, rpi B 256M
+armel	rpi		rpi		u-boot.bin
+
+# drEagle <drEagle@doukki.net>
+# Rick Thomas <rbthomas@rcthomas.org>
+armel	-		sheevaplug	u-boot.kwb
+
+armhf	exynos		arndale		u-boot.bin spl/arndale-spl.bin
+
+# Joost van Zwieten <joostvanzwieten@gmail.com>, Odroid-U3
+armhf	exynos		odroid		u-boot.bin
+
+# Vagrant Cascadian <vagrant@debian.org>, Odroid-XU4
+armhf	exynos		odroid-xu3	u-boot.bin
+
+# Marek Vasut <marex@denx.de>
+armhf	imx		dh_imx6		u-boot-with-spl.imx
+
+# Robert Nelson <robertcnelson@gmail.com>
+armhf	imx		mx53loco	u-boot.imx
+
+# Steve Langasek <vorlon@debian.org>, CuBox-i4
+# Vagrant Cascadian <vagrant@debian.org>, CuBox-i4pro, Cubox-i4x4, hummingboard-i1, hummingboard-i2ex
+# Rainer Dorsch <ml@bokomoko.de>, CuBox-i2u (i2u-300-d)
+# Rick Thomas <rbthomas@pobox.com>, Cubox-i4x4, Cubox-i4PRO
+armhf	imx		mx6cuboxi	u-boot.img SPL
+armhf	imx		mx6cuboxi4x4	SPL
+
+# Hector Oron <zumbi@debian.org>
+armhf	imx		nitrogen6q	u-boot.imx
+
+# Tony Mancill <tmancill@debian.org> 
+armhf	imx		novena		u-boot.img SPL
+
+# Michael Fladischer <michael@fladi.at>
+armhf	imx		udoo		u-boot.img SPL
+
+# Vagrant Cascadian <vagrant@debian.org>
+armhf	imx		usbarmory	u-boot.imx
+
+# Vagrant Cascadian <vagrant@debian.org>
+# Robert Nelson <robertcnelson@gmail.com>
+armhf	imx		wandboard	u-boot.img SPL
+
+# Vagrant Cascadian <vagrant@debian.org>
+# Andrew M.A. Cater <amacater@galactic.demon.co.uk>
+armhf	omap		am335x_boneblack u-boot.img MLO
+
+# Vagrant Cascadian <vagrant@debian.org>
+armhf	omap		am57xx_evm	u-boot.img MLO
+
+# Ben Hutchings <ben.hutchings@codethink.co.uk>
+armhf 	omap		dra7xx_evm	u-boot.img MLO
+
+# Robert Nelson <robertcnelson@gmail.com>
+armhf	omap		igep00x0	u-boot.img MLO
+
+armhf	omap		nokia_rx51	u-boot.bin
+
+# Robert Nelson <robertcnelson@gmail.com>
+armhf	omap		omap3_beagle	u-boot.img MLO
+
+# Vagrant Cascadian <vagrant@debian.org>
+armhf	omap		omap3_pandora	u-boot.bin
+
+# Robert Nelson <robertcnelson@gmail.com>
+armhf	omap		omap4_panda	u-boot.img MLO
+
+# Emilio Pozuelo Monfort <pochu@debian.org>
+# Sjoerd Simons <sjoerd@debian.org>
+armhf	rockchip	firefly-rk3288		u-boot.bin spl/u-boot-spl.bin
+
+# Vagrant Cascadian <vagrant@debian.org>, Raspberry PI 2B
+armhf	rpi		rpi_2		u-boot.bin
+
+# Ryan Finnie <ryan@finnie.org>
+armhf	rpi		rpi_3_32b	u-boot.bin
+
+# Christian Kastner <debian@kvr.at>
+armhf	sunxi		A10-OLinuXino-Lime	u-boot-sunxi-with-spl.bin
+
+# Benedikt Wildenhain <esperanto@benedikt-wildenhain.de>
+armhf	sunxi		A10s-OLinuXino-M	u-boot-sunxi-with-spl.bin
+
+# Karsten Merker <merker@debian.org>
+armhf	sunxi		A20-Olimex-SOM-EVB	u-boot-sunxi-with-spl.bin
+
+# Christian Kastner <debian@kvr.at>
+armhf	sunxi		A20-OLinuXino-Lime	u-boot-sunxi-with-spl.bin
+
+# Karsten Merker <merker@debian.org>
+armhf	sunxi		A20-OLinuXino-Lime2	u-boot-sunxi-with-spl.bin
+
+# Arne Ploese <aploese@gmx.de>
+armhf  sunxi		A20-OLinuXino_MICRO	u-boot-sunxi-with-spl.bin
+
+# Ian Campbell <ijc@debian.org>
+# Vagrant Cascadian <vagrant@debian.org>
+armhf	sunxi		Bananapi	u-boot-sunxi-with-spl.bin
+
+# Karsten Merker <merker@debian.org>
+armhf	sunxi		Bananapro	u-boot-sunxi-with-spl.bin
+
+# Vagrant Cascadian <vagrant@debian.org>
+armhf	sunxi		CHIP		u-boot-sunxi-with-spl.bin
+
+# Vagrant Cascadian <vagrant@debian.org>
+armhf	sunxi		Cubieboard	u-boot-sunxi-with-spl.bin
+
+# Ian Campbell <ijc@debian.org>
+# Karsten Merker <merker@debian.org>
+armhf	sunxi		Cubieboard2	u-boot-sunxi-with-spl.bin
+
+# Vagrant Cascadian <vagrant@debian.org>
+armhf	sunxi		Cubieboard4	u-boot-sunxi-with-spl.bin
+
+# Ian Campbell <ijc@debian.org>
+# Robert Nelson <robertcnelson@gmail.com>
+# Karsten Merker <merker@debian.org>
+armhf	sunxi		Cubietruck	u-boot-sunxi-with-spl.bin
+
+# Vagrant Cascadian <vagrant@debian.org>
+armhf	sunxi		Cubietruck_plus	u-boot-sunxi-with-spl.bin
+
+# Vagrant Cascadian <vagrant@debian.org>
+armhf	sunxi		Lamobo_R1	u-boot-sunxi-with-spl.bin
+
+# Robert Hegner <rhegner@hsr.ch>
+armhf	sunxi		Linksprite_pcDuino	u-boot-sunxi-with-spl.bin
+
+# Patrice Go <patgsiosisr@gmail.com>
+armhf	sunxi		Linksprite_pcDuino3	u-boot-sunxi-with-spl.bin
+
+# Jochen Sprickerhof <debian@jochen.sprickerhof.de>
+armhf	sunxi		Mini-X	u-boot-sunxi-with-spl.bin
+
+# Paul Tagliamonte <paultag@debian.org>
+armhf	sunxi		nanopi_neo	u-boot-sunxi-with-spl.bin
+
+# Vagrant Cascadian <vagrant@debian.org>, Orange PI Plus2
+armhf	sunxi		orangepi_plus	u-boot-sunxi-with-spl.bin
+
+# Mateusz Łukasik <mati75@linuxmint.pl>, Orange PI Zero
+armhf	sunxi		orangepi_zero	u-boot-sunxi-with-spl.bin
+
+# Ian Campbell <ijc@debian.org>
+armhf	tegra		jetson-tk1	u-boot-tegra.bin
+
+# Vagrant Cascadian <vagrant@debian.org>
+arm64	amlogic		odroid-c2	u-boot.bin
+
+# Ricardo Salveti <rsalveti@rsalveti.net>
+arm64	qcom		dragonboard410c	u-boot.bin
+
+# Ryan Finnie <ryan@finnie.org>
+arm64	rpi		rpi_3		u-boot.bin
+
+# Vagrant Cascadian <vagrant@debian.org>
+arm64	sunxi		pine64_plus	u-boot.bin spl/sunxi-spl.bin u-boot-nodtb.bin arch/arm/dts/sun50i-a64-pine64-plus.dtb arch/arm/dts/sun50i-a64-pine64.dtb
+
+# Martin Michlmayr <tbm@cyrius.com>
+arm64	tegra		p2371-2180	u-boot.bin
+
+# Vagrant Cascadian <vagrant@debian.org>
+arm64  rockchip        firefly-rk3399  u-boot.img u-boot.bin u-boot-nodtb.bin spl/u-boot-spl.bin arch/arm/dts/rk3399-firefly.dtb
+
+avr32	-		hammerhead	u-boot.img
+
+mips	-		qemu_mips	u-boot.bin
+
+sh4	-		r2dplus		u-boot.bin
+
+sh4	-		sh7785lcr_32bit	u-boot.bin
