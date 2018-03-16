@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# Copyright (C) Dongjin Kim <tobetter@gmail.com>
+#
+
+abort() {
+	echo "$1"
+	exit 1
+}
+
+flash_bootloader() {
+	local bl1="$1"
+	local uboot="$2"
+	local dev="$3"
+	local options=fsync,notrunc
+
+	[ -z ${dev} ] && abort "usage: $0 <your/sdcard/device>"
+	[ -f ${bl1} ] || abort "E: $bl1 does not exist"
+	[ -f ${uboot} ] || abort "E: $uboot does not exist"
+
+	dd if=${bl1} of=${dev} conv=${options} bs=1 count=442
+	dd if=${bl1} of=${dev} conv=${options} bs=512 skip=1 seek=1
+	dd if=${uboot} of=${dev} conv=${options} bs=512 seek=97
+	sync
+}

@@ -85,3 +85,12 @@ GTAGS
 *.orig
 *~
 \#*#
+
+# binaries built with odroid-c2_defconfig
+u-boot.bin.signed
+u-boot.bin.usb.bl2
+u-boot.bin.usb.tpl
+fip_create
+amlbootsig
+amlinfo
+unamlbootsig
