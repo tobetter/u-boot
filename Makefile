@@ -800,6 +800,9 @@ ifneq ($(BUILD_ROM)$(CONFIG_BUILD_ROM),)
 ALL-$(CONFIG_X86_RESET_VECTOR) += u-boot.rom
 endif
 
+ALL-$(CONFIG_TARGET_ODROID_C2) += \
+	$(srctree)/board/$(BOARDDIR)/bin/u-boot.bin.signed
+
 # enable combined SPL/u-boot/dtb rules for tegra
 ifeq ($(CONFIG_TEGRA)$(CONFIG_SPL),yy)
 ALL-y += u-boot-tegra.bin u-boot-nodtb-tegra.bin
@@ -1002,6 +1005,25 @@ OBJCOPYFLAGS_u-boot.ldr.srec := -I binary -O srec
 
 u-boot.ldr.hex u-boot.ldr.srec: u-boot.ldr FORCE
 	$(call if_changed,objcopy)
+
+ifeq ($(CONFIG_TARGET_ODROID_C2),y)
+$(srctree)/board/$(BOARDDIR)/bin/u-boot.bin.signed: u-boot.bin
+	$(Q)tools/amlogic/fip_create/fip_create \
+		--bl30 $(srctree)/board/$(BOARDDIR)/bin/bl30.bin \
+		--bl301 $(srctree)/board/$(BOARDDIR)/bin/bl301.bin \
+		--bl31 $(srctree)/board/$(BOARDDIR)/bin/bl31.bin \
+		--bl33 u-boot.bin /tmp/fip.bin
+	$(Q)tools/amlogic/fip_create/fip_create --dump /tmp/fip.bin
+	$(Q)cat $(srctree)/board/$(BOARDDIR)/bin/bl2.package \
+		/tmp/fip.bin > /tmp/u-boot.bin.dummy
+	$(Q)tools/amlogic/meson-tools/amlbootsig \
+		/tmp/u-boot.bin.dummy \
+		/tmp/u-boot.bin
+	$(Q)dd if=/tmp/u-boot.bin of=$@ bs=512 skip=96
+	$(Q)rm -f /tmp/fip.bin
+	$(Q)rm -f /tmp/u-boot.bin.dummy /tmp/u-boot.bin
+	$(Q)echo "'$@' is built!"
+endif
 
 #
 # U-Boot entry point, needed for booting of full-blown U-Boot
