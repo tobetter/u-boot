@@ -800,6 +800,14 @@ ifneq ($(BUILD_ROM)$(CONFIG_BUILD_ROM),)
 ALL-$(CONFIG_X86_RESET_VECTOR) += u-boot.rom
 endif
 
+ifeq ($(CONFIG_TARGET_ODROID_C2),y)
+FUSING_FOLDER := $(srctree)/sd_fuse
+FIP_FOLDER_SOC := $(srctree)/fip/$(SOC)
+FIP_CREATE_DIR := $(srctree)/tools/fip_create
+
+ALL-y += fip_create $(FUSING_FOLDER)/u-boot.bin
+endif
+
 # enable combined SPL/u-boot/dtb rules for tegra
 ifeq ($(CONFIG_TEGRA)$(CONFIG_SPL),yy)
 ALL-y += u-boot-tegra.bin u-boot-nodtb-tegra.bin
@@ -961,6 +969,41 @@ OBJCOPYFLAGS_u-boot.ldr.srec := -I binary -O srec
 
 u-boot.ldr.hex u-boot.ldr.srec: u-boot.ldr FORCE
 	$(call if_changed,objcopy)
+
+ifeq ($(CONFIG_TARGET_ODROID_C2),y)
+ODROID_BINARIES := $(FIP_CREATE_DIR)/fip_create \
+		  $(FIP_FOLDER_SOC)/fip.bin \
+		  $(FIP_FOLDER_SOC)/u-boot.bin \
+		  $(FUSING_FOLDER)/u-boot.bin
+
+.PHONY: fip_create
+fip_create: $(FIP_CREATE_DIR)/fip_create
+$(FIP_CREATE_DIR)/fip_create:
+	$(Q)$(MAKE) -C $(FIP_CREATE_DIR)
+
+$(FIP_FOLDER_SOC)/fip.bin: tools prepare u-boot.bin fip_create
+	$(Q)cp u-boot.bin $(FIP_FOLDER_SOC)/bl33.bin
+	$(Q)$(FIP_CREATE_DIR)/fip_create \
+		--bl30 $(FIP_FOLDER_SOC)/bl30.bin \
+		--bl301 $(FIP_FOLDER_SOC)/bl301.bin \
+		--bl31 $(FIP_FOLDER_SOC)/bl31.bin \
+		--bl33 u-boot.bin $@
+	$(Q)$(FIP_CREATE_DIR)/fip_create --dump $@
+
+$(FIP_FOLDER_SOC)/u-boot.bin: $(FIP_FOLDER_SOC)/fip.bin
+	$(Q)cat $(FIP_FOLDER_SOC)/bl2.package \
+		$(FIP_FOLDER_SOC)/fip.bin > $@.dummy
+	$(Q)$(FIP_FOLDER_SOC)/aml_encrypt_$(SOC) \
+		--bootsig --input $@.dummy --output $@
+	$(Q)rm -f $@.dummy
+
+$(FUSING_FOLDER)/u-boot.bin: fip_create $(FIP_FOLDER_SOC)/u-boot.bin
+	$(Q)dd if=$(FIP_FOLDER_SOC)/u-boot.bin of=$@ bs=512 skip=96
+	@echo '$@ build done!'
+
+clean-odroid:
+	echo $(ODROID_BINARIES)
+endif
 
 #
 # U-Boot entry point, needed for booting of full-blown U-Boot

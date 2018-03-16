@@ -86,3 +86,7 @@ GTAGS
 *.orig
 *~
 \#*#
+
+fip/meson/u-boot.bin.usb.bl2
+fip/meson/u-boot.bin.usb.tpl
+tools/fip_create/fip_create
