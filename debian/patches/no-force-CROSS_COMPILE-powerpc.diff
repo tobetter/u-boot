@@ -1,0 +1,18 @@
+Debian typically builds natively, so disable forced use of
+cross-compile.
+
+Index: u-boot/arch/powerpc/config.mk
+===================================================================
+--- u-boot.orig/arch/powerpc/config.mk
++++ u-boot/arch/powerpc/config.mk
+@@ -5,10 +5,6 @@
+ # SPDX-License-Identifier:	GPL-2.0+
+ #
+ 
+-ifeq ($(CROSS_COMPILE),)
+-CROSS_COMPILE := ppc_8xx-
+-endif
+-
+ CONFIG_STANDALONE_LOAD_ADDR ?= 0x40000
+ LDFLAGS_FINAL += --gc-sections
+ LDFLAGS_FINAL += --bss-plt

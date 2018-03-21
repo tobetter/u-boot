@@ -1,0 +1,16 @@
+
+# There are no file conflicts across architectures for u-boot, as each
+# target is only installed on a single architecture. In theory, some
+# targets could be built on multiple architectures, but could instead install
+# the package for the architecture needed.
+u-boot-tegra [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/jetson-tk1/uboot.elf
+u-boot-tegra [arm64]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/p2371-2180/uboot.elf
+
+# These bootloaders need to be statically linked.
+u-boot-tegra [armhf]: statically-linked-binary usr/lib/u-boot/jetson-tk1/uboot.elf
+u-boot-tegra [arm64]: statically-linked-binary usr/lib/u-boot/p2371-2180/uboot.elf
+
+u-boot-tegra: description-synopsis-starts-with-article
+
+# Synopsys is the name of a company, not a misspelling.
+u-boot-tegra: spelling-error-in-copyright Synopsys Synopsis

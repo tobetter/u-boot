@@ -1,0 +1,17 @@
+== Installation ==
+
+At this point, you must install U-Boot to flash yourself.
+
+The BeagleBone Black (am335x_boneblack) can be flashed to microSD or eMMC directly:
+
+ dd conv=fsync,notrunc if=/usr/lib/u-boot/am335x_boneblack/MLO of=/dev/mmcblkX count=1 seek=1 bs=128k
+ dd conv=fsync,notrunc if=/usr/lib/u-boot/am335x_boneblack/u-boot.img of=/dev/mmcblkX count=2 seek=1 bs=384k
+
+On OpenPandora:
+
+ modprobe nand_omap2 mtdblock
+ dd conv=fsync,notrunc if=/usr/lib/u-boot/omap3_pandora/u-boot.bin of=/dev/mtdblock1
+
+== U-Boot environment tools ==
+
+fw_printenv / fw_setenv read /etc/fw_env.config for configuration.

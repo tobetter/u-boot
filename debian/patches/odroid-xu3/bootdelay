@@ -1,0 +1,14 @@
+Use the default bootdelay from distro_bootcmd.
+
+Index: u-boot/include/configs/odroid_xu3.h
+===================================================================
+--- u-boot.orig/include/configs/odroid_xu3.h
++++ u-boot/include/configs/odroid_xu3.h
+@@ -106,7 +106,6 @@
+ 	EXYNOS_FDTFILE_SETTING \
+ 	MEM_LAYOUT_ENV_SETTINGS \
+ 	BOOTENV \
+-	"bootdelay=0\0" \
+ 	"rootfstype=ext4\0" \
+ 	"console=" CONFIG_DEFAULT_CONSOLE "\0"\
+ 	"fdtfile=exynos5422-odroidxu3.dtb\0" \

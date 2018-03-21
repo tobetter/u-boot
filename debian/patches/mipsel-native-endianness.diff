@@ -1,0 +1,54 @@
+[MIPS] Fix little-endian build with non-ELDK toolchains
+
+We've been in trouble for a long time when cross compiling with non-ELDK
+toolchains.  This is caused by -EB passed to CPPFLAGS incorrectly, by the
+lack of an endian specifier to LDFLAGS, and by wrong OUTPUT_FORMATs.
+
+We're going to implement two workarounds.  One is the endianness specifier
+bugfix not to pass -EB / -EL to CPPFLAGS unless ELDK toolchain is used.
+Note that ELDK and non-ELDK toolchains know their default endianness, so
+the endianness specifier may not be necessary in principle.
+
+The other is removal of OUTPUT_FORMAT in *.lds files.  If we have this,
+it doesn't work unless an endianness specifier is added to LDFLAGS.  As
+we haven't added that to LDFLAGS so far, it must have not worked properly,
+except ELDK; I don't know why and how ELDK works, though.
+
+With these two changes, all objects will be generated and linked in the
+toolchain's default endianness.  Then MAKEALL mips_el will work even with
+non-ELDK toolchain.
+
+Note that Linux/MIPS kernel has CONFIG_CPU_BIG_ENDIAN and
+CONFIG_CPU_LITTLE_ENDIAN alternatives to allow users to compile kernels
+with a toolchain for the other endianness. But U-Boot does not have such
+feature for now, and it's another story.
+
+Signed-off-by: Shinya Kuribayashi <skuribay@ruby.dti.ne.jp>
+---
+ board/dbau1x00/u-boot.lds  |    4 ----
+ board/gth2/u-boot.lds      |    4 ----
+ board/incaip/u-boot.lds    |    4 ----
+ board/pb1x00/u-boot.lds    |    4 ----
+ board/purple/u-boot.lds    |    4 ----
+ board/qemu-mips/u-boot.lds |    4 ----
+ board/tb0229/u-boot.lds    |    2 --
+ cpu/mips/config.mk         |    8 --------
+ examples/mips.lds          |    4 ----
+ mips_config.mk             |   26 ++++++++++++++++++++++++++
+ 10 files changed, 26 insertions(+), 38 deletions(-)
+
+Index: u-boot/examples/standalone/mips.lds
+===================================================================
+--- u-boot.orig/examples/standalone/mips.lds
++++ u-boot/examples/standalone/mips.lds
+@@ -5,10 +5,6 @@
+  * SPDX-License-Identifier:	GPL-2.0+
+  */
+ 
+-/*
+-OUTPUT_FORMAT("elf32-bigmips", "elf32-bigmips", "elf32-bigmips")
+-*/
+-OUTPUT_FORMAT("elf32-tradbigmips", "elf32-tradbigmips", "elf32-tradlittlemips")
+ OUTPUT_ARCH(mips)
+ SECTIONS
+ {

@@ -1,0 +1,25 @@
+== Installation ==
+
+At this point, you must install U-Boot to flash yourself from a host
+system using the Linux_For_Tegra tools from NVIDIA's developer portal:
+https://developer.nvidia.com/embedded/linux-tegra-archive
+
+=== Jetson TK1 ===
+
+sudo ./flash.sh -L /usr/lib/u-boot/jetson-tk1/u-boot-dtb-tegra.bin jetson-tk1 mmcblk1p1
+
+Please note that L4T R19.3 is currently required (the image does not
+boot if flashed with L4T R21.1 through R21.4).
+
+=== Jetson TX1 ===
+
+sudo ./flash.sh -L /usr/lib/u-boot/p2371-2180/u-boot-dtb.bin jetson-tx1 mmcblk0p1
+
+=== TODO ===
+
+TODO: Figure out how to do this with tools within Debian,
+e.g. tegrarcm and cbootimage.
+
+== U-Boot environment tools ==
+
+fw_printenv / fw_setenv read /etc/fw_env.config for configuration.
