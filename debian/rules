@@ -59,6 +59,16 @@ override_dh_auto_build:
 				odroid-c2) \
 					srcdir=board/$$subarch/$$platform/bin ; \
 					;; \
+				odroid-xu3) \
+					case $$target in \
+						u-boot.bin | uboot.elf) \
+							srcdir=$$builddir; \
+							;; \
+						*) \
+							srcdir=board/samsung/odroid/bin; \
+							;; \
+					esac; \
+					;; \
 				*) \
 					srcdir=$$builddir ; \
 					;; \

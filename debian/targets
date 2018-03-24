@@ -29,10 +29,10 @@ armel	-		sheevaplug	u-boot.kwb
 armhf	exynos		arndale		u-boot.bin spl/arndale-spl.bin
 
 # Joost van Zwieten <joostvanzwieten@gmail.com>, Odroid-U3
-armhf	exynos		odroid		u-boot.bin
+#armhf	exynos		odroid		u-boot.bin
 
 # Vagrant Cascadian <vagrant@debian.org>, Odroid-XU4
-armhf	exynos		odroid-xu3	u-boot.bin
+armhf	exynos		odroid-xu3	u-boot.bin bl1.bin.hardkernel bl2.bin.hardkernel tzsw.bin.hardkernel functions
 
 # Marek Vasut <marex@denx.de>
 armhf	imx		dh_imx6		u-boot-with-spl.imx

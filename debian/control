@@ -153,6 +153,17 @@ Description: A boot loader for exynos systems
  This package includes boot loaders for various Exynos platforms.
  ${uboot:platforms}
 
+Package: u-boot-exynos-installer
+Architecture: armhf
+Section: debian-installer
+Priority: standard
+Package-Type: udeb
+Provides: bootalble-system
+Depends: ${misc:Depends}, di-utils (>= 1.16)
+XB-Installer-Menu-Item: 7300
+Description: Install U-boot on the uSD/eMMC
+  This package will install U-boot boot loader
+
 Package: u-boot-rockchip
 Architecture: armhf arm64
 Multi-Arch: same
