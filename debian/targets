@@ -168,7 +168,7 @@ armhf	sunxi		orangepi_zero	u-boot-sunxi-with-spl.bin
 armhf	tegra		jetson-tk1	u-boot-tegra.bin
 
 # Vagrant Cascadian <vagrant@debian.org>
-arm64	amlogic		odroid-c2	u-boot.bin
+arm64	amlogic		odroid-c2	u-boot.bin.signed bl1.bin.hardkernel functions
 
 # Ricardo Salveti <rsalveti@rsalveti.net>
 arm64	qcom		dragonboard410c	u-boot.bin

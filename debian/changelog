@@ -1,3 +1,14 @@
+u-boot (2018.01+hkdk) experimental; urgency=medium
+
+  [ Dongjin Kim ]
+  * u-boot-amlogic-instealler: new package to install U-boot by d-i
+    - bl1.bin.hardkernel: BL1 for Hardkernel's ODROID-C2
+    - u-boot.bin.signed: Signed U-boot image
+    - functions: Helper function to flash booting binaries
+    - u-boot.elf
+
+ -- Dongjin Kim <tobetter@gmail.com>  Fri, 16 Mar 2018 23:37:31 -0400
+
 u-boot (2018.01+dfsg1-2) unstable; urgency=medium
 
   * Update to use https copyright format URL.

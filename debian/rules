@@ -48,11 +48,23 @@ override_dh_auto_build:
 				install -m 644 $$builddir/u-boot $$builddir/uboot.elf; \
 				$(CROSS_COMPILE)strip --remove-section=.comment \
 					$$builddir/uboot.elf; \
+				if [ "$$platform" = "odroid-c2" ]; then \
+					cp $$builddir/uboot.elf \
+						board/$$subarch/$$platform/bin/$$target; \
+				fi \
 				;; \
 		esac; \
 		for target in $$targets; do \
-			chmod -x $$builddir/$$target; \
-			echo $$builddir/$$target /usr/lib/u-boot/$$platform/ \
+			case $$platform in \
+				odroid-c2) \
+					srcdir=board/$$subarch/$$platform/bin ; \
+					;; \
+				*) \
+					srcdir=$$builddir ; \
+					;; \
+			esac; \
+			chmod -x $$srcdir/$$target; \
+			echo $$srcdir/$$target /usr/lib/u-boot/$$platform/ \
 				>> debian/build/targets.$$subarch; \
 			echo $$platform >> debian/build/platforms.$$subarch; \
 		done ; \
