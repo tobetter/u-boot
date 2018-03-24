@@ -111,8 +111,6 @@ override_dh_auto_build:
 	$(CROSS_COMPILE)strip --remove-section=.comment $(TOOLSDIR)/tools/env/fw_printenv
 	$(CROSS_COMPILE)strip --remove-section=.comment $(TOOLSDIR)/tools/mkimage
 	$(CROSS_COMPILE)strip --remove-section=.comment $(TOOLSDIR)/tools/mkenvimage
-	$(CROSS_COMPILE)strip --remove-section=.comment $(TOOLSDIR)/tools/kwboot
-	$(CROSS_COMPILE)strip --remove-section=.comment $(TOOLSDIR)/tools/mksunxiboot
 	$(CROSS_COMPILE)strip --remove-section=.comment $(TOOLSDIR)/tools/dumpimage
 
 override_dh_auto_test:
