@@ -1,0 +1,29 @@
+#!/bin/sh
+#
+# Copyright (C) Dongjin Kim <tobetter@gmail.com>
+#
+
+abort() {
+	echo "$1"
+	exit 1
+}
+
+flash_bootloader() {
+	local bl1="$1"
+	local bl2="$2"
+	local uboot="$3"
+	local dev="$4"
+	local tzsw="$(dirname ${bl1})/tzsw.bin.hardkernel"
+	local options="iflag=dsync oflag=dsync conv=fsync,notrunc"
+
+	[ -z ${dev} ] && abort "usage: $0 <your/sdcard/device>"
+	[ -f ${bl1} ] || abort "E: $bl1 does not exist"
+	[ -f ${bl2} ] || abort "E: $bl2 does not exist"
+	[ -f ${uboot} ] || abort "E: $uboot does not exit"
+
+	dd if=${bl1} of=${dev} seek=1
+	dd if=${bl2} of=${dev} seek=31
+	dd if=${tzsw} of=${dev} seek=63
+	dd if=${uboot} of=${dev} seek=1503
+	sync
+}
