@@ -1,3 +1,10 @@
+u-boot (2018.01+hkdk1) experimental; urgency=medium
+
+  [ Dongjin Kim ]
+  * Add 'u-boot-exynos[-installer] for Hardkernel's ODROID-XU3/4
+
+ -- Dongjin Kim <tobetter@gmail.com>  Tue, 27 Mar 2018 20:34:58 -0400
+
 u-boot (2018.01+hkdk) experimental; urgency=medium
 
   [ Dongjin Kim ]
