@@ -16,6 +16,6 @@ bl1=${binary_dir}/bl1.bin.hardkernel
 bl2=${binary_dir}/bl2.bin.hardkernel
 uboot=${binary_dir}/u-boot.bin
 
-flash_bootloader ${bl1} ${bl2} ${uboot} ${dev}
+flash_bootloader ${dev} ${bl1} ${bl2} ${uboot}
 eject $1
 echo Finished.
