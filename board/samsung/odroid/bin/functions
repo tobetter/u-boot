@@ -9,10 +9,10 @@ abort() {
 }
 
 flash_bootloader() {
-	local bl1="$1"
-	local bl2="$2"
-	local uboot="$3"
-	local dev="$4"
+	local dev="$1"
+	local bl1="$2"
+	local bl2="$3"
+	local uboot="$4"
 	local tzsw="$(dirname ${bl1})/tzsw.bin.hardkernel"
 	local options="iflag=dsync oflag=dsync conv=fsync,notrunc"
 

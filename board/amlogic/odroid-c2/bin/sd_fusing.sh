@@ -16,6 +16,6 @@ dev="$1"
 bl1=${binary_dir}/bl1.bin.hardkernel
 uboot=${binary_dir}/u-boot.bin.signed
 
-flash_bootloader ${bl1} ${uboot} ${dev}
+flash_bootloader ${dev} ${bl1} ${uboot}
 eject $1
 echo Finished.
