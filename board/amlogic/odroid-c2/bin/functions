@@ -9,9 +9,9 @@ abort() {
 }
 
 flash_bootloader() {
-	local bl1="$1"
-	local uboot="$2"
-	local dev="$3"
+	local dev="$1"
+	local bl1="$2"
+	local uboot="$3"
 	local options=fsync,notrunc
 
 	[ -z ${dev} ] && abort "usage: $0 <your/sdcard/device>"
