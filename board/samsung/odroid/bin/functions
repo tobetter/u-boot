@@ -23,7 +23,7 @@ flash_bootloader() {
 
 	dd if=${bl1} of=${dev} seek=1
 	dd if=${bl2} of=${dev} seek=31
-	dd if=${tzsw} of=${dev} seek=63
-	dd if=${uboot} of=${dev} seek=1503
+	dd if=${uboot} of=${dev} seek=63
+	dd if=${tzsw} of=${dev} seek=1503
 	sync
 }
