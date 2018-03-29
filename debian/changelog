@@ -1,3 +1,13 @@
+u-boot (2018.01+hkdk2) experimental; urgency=medium
+
+  [ Dongjin Kim ]
+  * Fix to read proper boot device from a dialog, instead of getting the
+    default value always.
+  * Fix the argument order for 'flash_bootloader' to put the boot device ahead
+    than others.
+
+ -- Dongjin Kim <tobetter@gmail.com>  Thu, 29 Mar 2018 04:17:59 +0000
+
 u-boot (2018.01+hkdk1) experimental; urgency=medium
 
   [ Dongjin Kim ]

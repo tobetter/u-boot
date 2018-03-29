@@ -27,12 +27,16 @@ while :; do
 		fi
 	done
 
-	db_subst shared/ask_which_device DEVICES_LIST ${devlist}
-	db_set shared/ask_which_device ${default_dev}
-	db_input ${bootdev_priority} shared/ask_which_device || [ $? -eq 30 ]
-	db_get shared/ask_which_device
+	db_subst u-boot-installer/bootdev DEVICES_LIST ${devlist}
+	db_set u-boot-installer/bootdev ${default_dev}
+	db_input ${bootdev_priority} u-boot-installer/bootdev || true
+	if ! db_go; then
+		exit 10	# back up to menu
+	fi
+
+	db_get u-boot-installer/bootdev
 	if [ "${RET}" != "skip" ]; then
-		flash_bootloader ${bl1} ${bl2} ${uboot} ${RET}
+		flash_bootloader ${RET} ${bl1} ${bl2} ${uboot}
 		break;
 	fi
 done
