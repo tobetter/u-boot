@@ -1,0 +1,6 @@
+Template: u-boot-installer/bootdev
+Type: select
+Choices-C: ${DEVICES_LIST}, skip
+Choices: ${DEVICES_LIST}, Skip installation
+Description: What is the booting device?
+  Select a disk to install a bootloader.

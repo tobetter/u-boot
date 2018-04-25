@@ -1,0 +1,82 @@
+Source: u-boot-odroid
+Section: admin
+Priority: optional
+Maintainer: Dongjin Kim <tobetter@gmail.com>
+Build-Depends:
+ bc,
+ debhelper (>= 8.0.0),
+ device-tree-compiler,
+ dpkg-dev (>= 1.17.14),
+ libfdt-dev:native [arm64],
+ libc6:arm64 [arm64] <cross>,
+ libc6:armhf [armhf] <cross>,
+ libc6:armel [armel] <cross>,
+ libpython-dev:native [armhf arm64],
+ python:any [armhf arm64],
+ skales:native [arm64],
+ swig [armhf arm64],
+Standards-Version: 4.1.3
+Homepage: http://www.denx.de/wiki/U-Boot/
+Vcs-Git: https://anonscm.debian.org/git/collab-maint/u-boot.git
+Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/u-boot.git/
+
+Package: u-boot-odroid
+Architecture: armel armhf avr32 mips sh4
+Multi-Arch: same
+Depends: ${misc:Depends},
+ u-boot-imx [armhf], u-boot-omap [armhf], u-boot-sunxi [armhf], u-boot-exynos [armhf]
+Description: A boot loader for embedded systems
+ Das U-Boot is a cross-platform bootloader for embedded systems,
+ used as the default boot loader by several board vendors.  It is
+ intended to be easy to port and to debug, and runs on many
+ supported architectures, including PPC, ARM, MIPS, x86, m68k,
+ NIOS, and Microblaze.
+ ${uboot:platforms}
+
+Package: u-boot-odroid-amlogic
+Architecture: arm64
+Multi-Arch: same
+Depends: ${misc:Depends}
+Description: A boot loader for amlogic systems
+ Das U-Boot is a cross-platform bootloader for embedded systems,
+ used as the default boot loader by several board vendors.  It is
+ intended to be easy to port and to debug, and runs on many
+ supported architectures, including PPC, ARM, MIPS, x86, m68k,
+ NIOS, and Microblaze.
+ .
+ This package includes boot loaders for various amlogic platforms.
+ ${uboot:platforms}
+
+Package: u-boot-odroid-amlogic-installer
+Section: debian-installer
+Priority: standard
+Package-Type: udeb
+Architecture: arm64
+Provides: bootalble-system
+Depends: ${misc:Depends}
+XB-Installer-Menu-Item: 7400
+Description: Install a boot loader
+
+Package: u-boot-odroid-exynos
+Architecture: armhf
+Multi-Arch: same
+Depends: ${misc:Depends}
+Description: A boot loader for exynos systems
+ Das U-Boot is a cross-platform bootloader for embedded systems,
+ used as the default boot loader by several board vendors.  It is
+ intended to be easy to port and to debug, and runs on many
+ supported architectures, including PPC, ARM, MIPS, x86, m68k,
+ NIOS, and Microblaze.
+ .
+ This package includes boot loaders for various Exynos platforms.
+ ${uboot:platforms}
+
+Package: u-boot-odroid-exynos-installer
+Section: debian-installer
+Priority: standard
+Package-Type: udeb
+Architecture: armhf
+Provides: bootalble-system
+Depends: ${misc:Depends}
+XB-Installer-Menu-Item: 9900
+Description: Install a boot loader

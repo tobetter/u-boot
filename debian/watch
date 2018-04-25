@@ -1,0 +1,4 @@
+version=3
+
+opts=pasv,repacksuffix=+dfsg1,uversionmangle=s/-rc/~rc/g,dversionmangle=s/\+dfsg.*//g,pgpsigurlmangle=s%$%.sig% \
+ftp://ftp.denx.de/pub/@PACKAGE@/@PACKAGE@@ANY_VERSION@@ARCHIVE_EXT@

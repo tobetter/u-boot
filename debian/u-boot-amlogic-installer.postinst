@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+# Copyright (C) 2018 Dongjin Kim <tobetter@gmail.com>
+#
+
+set -x
+
+[ -z ${binary_dir} ] && binary_dir="/usr/lib/u-boot/odroid-c2"
+
+. /usr/share/debconf/confmodule
+. ${binary_dir}/functions
+
+bl1=${binary_dir}/bl1.bin.hardkernel
+uboot=${binary_dir}/u-boot.bin.signed
+options=fsync,notrunc
+
+bootdev_priority="critical"
+default_dev="/dev/mmcblk1"
+
+while :; do
+	DEVS="$(list-devices disk)"
+	devlist=
+	for dev in $DEVS; do
+		if [ -n "$(echo ${dev} | grep -v "\/dev\/mmcblk.boot")" ]; then
+			devlist=${devlist:+$devlist, }${dev}
+		fi
+	done
+
+	db_subst u-boot-installer/bootdev DEVICES_LIST ${devlist}
+	db_set u-boot-installer/bootdev ${default_dev}
+	db_input ${bootdev_priority} u-boot-installer/bootdev || true
+	if ! db_go; then
+		exit 10	# back up to menu
+	fi
+
+	db_get u-boot-installer/bootdev
+	if [ "${RET}" != "skip" ]; then
+		flash_bootloader ${RET} ${bl1} ${uboot}
+		break;
+	fi
+done

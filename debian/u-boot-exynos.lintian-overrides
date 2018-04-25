@@ -1,0 +1,18 @@
+
+# There are no file conflicts across architectures for u-boot, as each
+# target is only installed on a single architecture. In theory, some
+# targets could be built on multiple architectures, but could instead install
+# the package for the architecture needed.
+u-boot-exynos [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/arndale/uboot.elf
+u-boot-exynos [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/odroid/uboot.elf
+u-boot-exynos [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/odroid-xu3/uboot.elf
+
+# These bootloaders need to be statically linked.
+u-boot-exynos [armhf]: statically-linked-binary usr/lib/u-boot/arndale/uboot.elf
+u-boot-exynos [armhf]: statically-linked-binary usr/lib/u-boot/odroid/uboot.elf
+u-boot-exynos [armhf]: statically-linked-binary usr/lib/u-boot/odroid-xu3/uboot.elf
+
+u-boot-exynos: description-synopsis-starts-with-article
+
+# Synopsys is the name of a company, not a misspelling.
+u-boot-exynos: spelling-error-in-copyright Synopsys Synopsis

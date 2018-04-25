@@ -1,0 +1,30 @@
+
+# There are no file conflicts across architectures for u-boot, as each
+# target is only installed on a single architecture. In theory, some
+# targets could be built on multiple architectures, but could instead install
+# the package for the architecture needed.
+u-boot-imx [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/mx53loco/uboot.elf
+u-boot-imx [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/dh_imx6/uboot.elf
+u-boot-imx [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/mx6cuboxi/uboot.elf
+u-boot-imx [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/mx6cuboxi4x4/uboot.elf
+u-boot-imx [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/nitrogen6q/uboot.elf
+u-boot-imx [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/novena/uboot.elf
+u-boot-imx [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/udoo/uboot.elf
+u-boot-imx [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/usbarmory/uboot.elf
+u-boot-imx [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/wandboard/uboot.elf
+
+# These bootloaders need to be statically linked.
+u-boot-imx [armhf]: statically-linked-binary usr/lib/u-boot/mx53loco/uboot.elf
+u-boot-imx [armhf]: statically-linked-binary usr/lib/u-boot/dh_imx6/uboot.elf
+u-boot-imx [armhf]: statically-linked-binary usr/lib/u-boot/mx6cuboxi/uboot.elf
+u-boot-imx [armhf]: statically-linked-binary usr/lib/u-boot/mx6cuboxi4x4/uboot.elf
+u-boot-imx [armhf]: statically-linked-binary usr/lib/u-boot/nitrogen6q/uboot.elf
+u-boot-imx [armhf]: statically-linked-binary usr/lib/u-boot/novena/uboot.elf
+u-boot-imx [armhf]: statically-linked-binary usr/lib/u-boot/udoo/uboot.elf
+u-boot-imx [armhf]: statically-linked-binary usr/lib/u-boot/usbarmory/uboot.elf
+u-boot-imx [armhf]: statically-linked-binary usr/lib/u-boot/wandboard/uboot.elf
+
+u-boot-imx: description-synopsis-starts-with-article
+
+# Synopsys is the name of a company, not a misspelling.
+u-boot-imx: spelling-error-in-copyright Synopsys Synopsis

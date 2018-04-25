@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -x
+set -e
+builddir="$1"
+platform="$2"
+subarch="$3"
+platform_cpu=$(grep CONFIG_ROCKCHIP_RK configs/${platform}_defconfig)
+case $platform_cpu in
+    *3399=y) platform_cpu_type=rk3399 ;;
+    *3288=y) platform_cpu_type=rk3288 ;;
+esac
+
+${builddir}/tools/mkimage -T rksd -n ${platform_cpu_type} \
+    -d ${builddir}/spl/u-boot-spl.bin \
+    ${builddir}/u-boot-spl.rksd
+echo ${builddir}/u-boot-spl.rksd /usr/lib/u-boot/${platform}/ \
+    >> debian/build/targets.${subarch}
+
+if grep ^CONFIG_SPL_ROCKCHIP_BACK_TO_BROM=y configs/${platform}_defconfig ; then
+   cat ${builddir}/u-boot-spl.rksd ${builddir}/u-boot.bin > ${builddir}/u-boot.rksd
+   echo ${builddir}/u-boot.rksd /usr/lib/u-boot/${platform}/ \
+       >> debian/build/targets.${subarch}
+fi

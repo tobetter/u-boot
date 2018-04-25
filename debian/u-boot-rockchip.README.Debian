@@ -1,0 +1,13 @@
+== Installation ==
+
+The Firefly-RK3288 u-boot can be installed to microSD:
+
+  dd conv=fsync,notrunc if=/usr/lib/u-boot/firefly-rk3288/u-boot.rksd of=/dev/DEVICE seek=64
+
+Where device is the raw device name of the microSD card or USB to
+microSD adapter.
+
+In order to get it to boot from microSD, it may require overwriting
+the vendor-supplied u-boot that ships with the board.
+
+See README.rockchip for more information.
