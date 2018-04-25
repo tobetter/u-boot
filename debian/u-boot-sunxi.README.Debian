@@ -1,0 +1,21 @@
+== Installation ==
+
+At this point, you must install U-Boot to flash yourself.
+
+Many sunxi boards (Bananapi, Cubieboard) can be written to SD directly:
+
+ dd conv=fsync,notrunc if=/usr/lib/u-boot/BOARD/u-boot-sunxi-with-spl.bin of=/dev/mmcblkX bs=1024 seek=8
+
+Pine64 plus requires building arm-trusted-firmware as described in
+README.sunxi64, and using mksunxi_fit_spl.sh to generate a u-boot FIT
+image:
+
+  cd /usr/lib/u-boot/pine64_plus
+  BL31=/path/to/ATF/bl31.bin ./mksunxi_fit_spl.sh *.dtb > ~/u-boot.its
+  mkimage -f ~/u-boot.its ~/u-boot.itb
+  dd conv=fsync,notrunc if=sunxi-spl.bin of=/dev/mmcblkX bs=8k seek=1
+  dd conv=fsync,notrunc if=~/u-boot.itb of=/dev/mmcblkX bs=8k seek=5
+
+== U-Boot environment tools ==
+
+fw_printenv / fw_setenv read /etc/fw_env.config for configuration.

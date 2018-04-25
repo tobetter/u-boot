@@ -1,0 +1,34 @@
+
+# There are no file conflicts across architectures for u-boot, as each
+# target is only installed on a single architecture. In theory, some
+# targets could be built on multiple architectures, but could instead install
+# the package for the architecture needed.
+u-boot [armel]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/dockstar/uboot.elf
+u-boot [armel]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/dreamplug/uboot.elf
+u-boot [armel]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/guruplug/uboot.elf
+u-boot [armel]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/openrd_base/uboot.elf
+u-boot [armel]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/openrd_client/uboot.elf
+u-boot [armel]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/openrd_ultimate/uboot.elf
+u-boot [armel]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/sheevaplug/uboot.elf
+u-boot [avr32]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/hammerhead/uboot.elf
+u-boot [mips]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/qemu_mips/uboot.elf
+u-boot [sh4]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/r2dplus/uboot.elf
+u-boot [sh4]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/sh7785lcr_32bit/uboot.elf
+
+# These bootloaders need to be statically linked.
+u-boot [armel]: statically-linked-binary usr/lib/u-boot/dockstar/uboot.elf
+u-boot [armel]: statically-linked-binary usr/lib/u-boot/dreamplug/uboot.elf
+u-boot [armel]: statically-linked-binary usr/lib/u-boot/guruplug/uboot.elf
+u-boot [armel]: statically-linked-binary usr/lib/u-boot/openrd_base/uboot.elf
+u-boot [armel]: statically-linked-binary usr/lib/u-boot/openrd_client/uboot.elf
+u-boot [armel]: statically-linked-binary usr/lib/u-boot/openrd_ultimate/uboot.elf
+u-boot [armel]: statically-linked-binary usr/lib/u-boot/sheevaplug/uboot.elf
+u-boot [avr32]: statically-linked-binary usr/lib/u-boot/hammerhead/uboot.elf
+u-boot [mips]: statically-linked-binary usr/lib/u-boot/qemu_mips/uboot.elf
+u-boot [sh4]: statically-linked-binary usr/lib/u-boot/r2dplus/uboot.elf
+u-boot [sh4]: statically-linked-binary usr/lib/u-boot/sh7785lcr_32bit/uboot.elf
+
+u-boot: description-synopsis-starts-with-article
+
+# Synopsys is the name of a company, not a misspelling.
+u-boot: spelling-error-in-copyright Synopsys Synopsis

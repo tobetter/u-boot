@@ -1,0 +1,18 @@
+Ensure that CONFIG_SANDBOX is set when running "make env", avoiding a
+failure to build caused by config_distro_bootcmd.h following the wrong
+codepath...
+
+Index: u-boot/include/configs/sandbox.h
+===================================================================
+--- u-boot.orig/include/configs/sandbox.h
++++ u-boot/include/configs/sandbox.h
+@@ -74,6 +74,9 @@
+ 	func(HOST, host, 1) \
+ 	func(HOST, host, 0)
+ 
++#ifndef CONFIG_SANDBOX
++#define CONFIG_SANDBOX 1
++#endif
+ #include <config_distro_bootcmd.h>
+ 
+ #define CONFIG_KEEP_SERVERADDR

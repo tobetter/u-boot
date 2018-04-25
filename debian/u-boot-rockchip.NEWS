@@ -1,0 +1,6 @@
+u-boot (2017.07+dfsg1-2) unstable; urgency=medium
+
+  The firefly-rk3288 target now requires using the instructions for
+  BACK_TO_BROM.
+
+ -- Vagrant Cascadian <vagrant@debian.org>  Thu, 27 Jul 2017 23:34:43 -0400

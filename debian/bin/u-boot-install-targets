@@ -1,0 +1,10 @@
+#!/bin/sh
+target=$1
+docs="$2"
+subarch_install_file="debian/build/targets.${target}"
+if [ -f "${subarch_install_file}" ]; then
+    cat "${subarch_install_file}"
+fi
+for doc in ${docs} ; do
+    echo ${doc} /usr/share/doc/u-boot-${target}/
+done

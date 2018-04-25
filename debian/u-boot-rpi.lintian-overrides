@@ -1,0 +1,20 @@
+
+# There are no file conflicts across architectures for u-boot, as each
+# target is only installed on a single architecture. In theory, some
+# targets could be built on multiple architectures, but could instead install
+# the package for the architecture needed.
+u-boot-rpi [armel]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/rpi/uboot.elf
+u-boot-rpi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/rpi_2/uboot.elf
+u-boot-rpi [armhf]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/rpi_3_32b/uboot.elf
+u-boot-rpi [arm64]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/rpi_3/uboot.elf
+
+# These bootloaders need to be statically linked.
+u-boot-rpi [armel]: statically-linked-binary usr/lib/u-boot/rpi/uboot.elf
+u-boot-rpi [armhf]: statically-linked-binary usr/lib/u-boot/rpi_2/uboot.elf
+u-boot-rpi [armhf]: statically-linked-binary usr/lib/u-boot/rpi_3_32b/uboot.elf
+u-boot-rpi [arm64]: statically-linked-binary usr/lib/u-boot/rpi_3/uboot.elf
+
+u-boot-rpi: description-synopsis-starts-with-article
+
+# Synopsys is the name of a company, not a misspelling.
+u-boot-rpi: spelling-error-in-copyright Synopsys Synopsis

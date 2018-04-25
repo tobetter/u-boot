@@ -1,0 +1,44 @@
+From 2289ef34642ea6b8c0954d276106222f5895180d Mon Sep 17 00:00:00 2001
+From: Peter Lebbing <peter@digitalbrains.com>
+Date: Thu, 28 Sep 2017 14:40:24 +0200
+Subject: [PATCH] Bug#877074: u-boot-exynos: Default environment for Odroid XU3
+ has wrong console var
+
+Package: u-boot-exynos
+Version: 2017.09+dfsg1-1
+Severity: normal
+Tags: patch
+
+The odroid-xu3 platform passes a wrong "console" argument on the kernel commandline:
+
+console=console=ttySAC2,115200n8
+
+>From the source, it's clear where this comes from:
+include/configs/odroid_xu3.h:
+#define CONFIG_DEFAULT_CONSOLE         "console=ttySAC2,115200n8\0"
+#define CONFIG_EXTRA_ENV_SETTINGS \
+[...]
+        "console=" CONFIG_DEFAULT_CONSOLE \
+
+/etc/flash-kernel/bootscript/bootscr.uboot-generic:
+  setenv bootargs "${bootargs} console=${console}"
+
+The patch below makes the situation equal to what Debian patches in odroid.h: drop it from CONFIG_DEFAULT_CONSOLE. Judging from a grep in include/configs, I think the same situation exists for s5pc210_universal.h, s5p_goni.h, trats2.h and trats.h, but I don't have these devices. There are many more header files that have a "console=" in their CONFIG_DEFAULT_CONSOLE, but I don't see that definition being subsequently used somewhere, so I don't know whether it's being used wrongly or not.
+
+Thanks for your efforts,
+
+Peter.
+
+Index: u-boot/include/configs/odroid_xu3.h
+===================================================================
+--- u-boot.orig/include/configs/odroid_xu3.h
++++ u-boot/include/configs/odroid_xu3.h
+@@ -34,7 +34,7 @@
+ 
+ #define CONFIG_SYS_INIT_SP_ADDR        (CONFIG_SYS_LOAD_ADDR - 0x1000000)
+ 
+-#define CONFIG_DEFAULT_CONSOLE		"ttySAC2,115200n8"
++#define CONFIG_DEFAULT_CONSOLE		"ttySAC2,115200n8\0"
+ 
+ /* USB */
+ #define CONFIG_USB_EHCI_EXYNOS

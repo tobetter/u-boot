@@ -1,0 +1,60 @@
+Description: Add support for cubox i4x4
+ This patch adds a config setting to support the ram on the cubox i4x4. There
+ is no runtime detection so separate builds are needed for the i4 and i4x4.
+ 
+ A new defconfig is also added to turn on the new option so the debian build
+ system can use it.
+ 
+ Thanks to vagrantc for identifying the underlying change needed.
+Author: Peter Michael Green <plugwash@debian.org>
+
+Index: u-boot/board/solidrun/mx6cuboxi/mx6cuboxi.c
+===================================================================
+--- u-boot.orig/board/solidrun/mx6cuboxi/mx6cuboxi.c
++++ u-boot/board/solidrun/mx6cuboxi/mx6cuboxi.c
+@@ -568,6 +568,19 @@ static struct mx6_ddr3_cfg mem_ddr_4g =
+ 	.trasmin = 3500,
+ };
+ 
++static struct mx6_ddr3_cfg mem_ddr_8g = {
++	.mem_speed = 1600,
++	.density = 4,
++	.width = 16,
++	.banks = 8,
++	.rowaddr = 16,
++	.coladdr = 10,
++	.pagesz = 2,
++	.trcd = 1375,
++	.trcmin = 4875,
++	.trasmin = 3500,
++};
++
+ static void ccgr_init(void)
+ {
+ 	struct mxc_ccm_reg *ccm = (struct mxc_ccm_reg *)CCM_BASE_ADDR;
+@@ -611,7 +624,11 @@ static void spl_dram_init(int width)
+ 	if (is_cpu_type(MXC_CPU_MX6D))
+ 		mx6_dram_cfg(&sysinfo, &mx6q_1g_mmcd_calib, &mem_ddr_2g);
+ 	else if (is_cpu_type(MXC_CPU_MX6Q))
+-		mx6_dram_cfg(&sysinfo, &mx6q_2g_mmcd_calib, &mem_ddr_4g);
++		#ifdef CONFIG_I4X4_RAM
++			mx6_dram_cfg(&sysinfo, &mx6q_2g_mmcd_calib, &mem_ddr_8g);
++		#else
++			mx6_dram_cfg(&sysinfo, &mx6q_2g_mmcd_calib, &mem_ddr_4g);
++		#endif
+ 	else if (is_cpu_type(MXC_CPU_MX6DL))
+ 		mx6_dram_cfg(&sysinfo, &mx6dl_1g_mmcd_calib, &mem_ddr_2g);
+ 	else if (is_cpu_type(MXC_CPU_MX6SOLO))
+Index: u-boot/board/solidrun/mx6cuboxi/Kconfig
+===================================================================
+--- u-boot.orig/board/solidrun/mx6cuboxi/Kconfig
++++ u-boot/board/solidrun/mx6cuboxi/Kconfig
+@@ -9,4 +9,8 @@ config SYS_VENDOR
+ config SYS_CONFIG_NAME
+ 	default "mx6cuboxi"
+ 
++config I4X4_RAM
++	bool "4GB ram support for cubox i4x4 (will break cubox i4)"
++	default n
++
+ endif

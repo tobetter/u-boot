@@ -1,0 +1,17 @@
+Description: Set the fdtfile variable based from the value of
+  CONFIG_DEFAULT_DEVICE_TREE.
+Bug-Debian: https://bugs.debian.org/870897
+Author: Vagrant Cascadian <vagrant@debian.org>
+
+Index: u-boot/include/configs/firefly-rk3288.h
+===================================================================
+--- u-boot.orig/include/configs/firefly-rk3288.h
++++ u-boot/include/configs/firefly-rk3288.h
+@@ -8,6 +8,7 @@
+ #define __CONFIG_H
+ 
+ #define ROCKCHIP_DEVICE_SETTINGS \
++		"fdtfile=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
+ 		"stdin=serial,usbkbd\0" \
+ 		"stdout=serial,vidconsole\0" \
+ 		"stderr=serial,vidconsole\0" \

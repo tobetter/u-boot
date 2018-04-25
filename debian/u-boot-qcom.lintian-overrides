@@ -1,0 +1,14 @@
+
+# There are no file conflicts across architectures for u-boot, as each
+# target is only installed on a single architecture. In theory, some
+# targets could be built on multiple architectures, but could instead install
+# the package for the architecture needed.
+u-boot-qcom [arm64]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/dragonboard410c/uboot.elf
+
+# These bootloaders need to be statically linked.
+u-boot-qcom [arm64]: statically-linked-binary usr/lib/u-boot/dragonboard410c/uboot.elf
+
+u-boot-qcom: description-synopsis-starts-with-article
+
+# Synopsys is the name of a company, not a misspelling.
+u-boot-qcom: spelling-error-in-copyright Synopsys Synopsis

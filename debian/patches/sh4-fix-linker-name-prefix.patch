@@ -1,0 +1,30 @@
+Description: sh4-fix-linker-name-prefix.patch
+ u-boot currently fails to build from source on sh4 since the
+ linker name prefix defined in arch/sh/config.mk is outdated.
+ On current Debian installations, the binaries of the GNU
+ toolchain are named using the triplett scheme
+ $arch-$kernel-$toolchain. Thus, on sh4, the proper name
+ is "sh4-linux-gnu-ld" instead of "sh4-linux-ld". This
+ patch updates build configuration on sh4 to reflect that.
+
+---
+
+Origin: Debian
+Bug: (none yet)
+Bug-Debian: https://bugs.debian.org/771747
+Bug-Ubuntu: (none)
+Forwarded: (not yet)
+Reviewed-By: John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>
+Last-Update: 2014-12-10
+
+--- u-boot-2014.10+dfsg1.orig/arch/sh/config.mk
++++ u-boot-2014.10+dfsg1/arch/sh/config.mk
+@@ -6,7 +6,7 @@
+ #
+ 
+ ifeq ($(CROSS_COMPILE),)
+-CROSS_COMPILE := sh4-linux-
++CROSS_COMPILE := sh4-linux-gnu-
+ endif
+ 
+ CONFIG_STANDALONE_LOAD_ADDR ?= 0x8C000000

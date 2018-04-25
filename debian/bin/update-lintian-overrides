@@ -1,0 +1,46 @@
+#!/bin/sh
+
+target_file=debian/targets
+
+awk '/^[a-z0-9]/{print $2}' ${target_file} | sort -u | while read subarch ; do
+    case ${subarch} in
+        -) package=u-boot ;;
+        *) package=u-boot-${subarch} ;;
+    esac
+    overrides=debian/${package}.lintian-overrides
+
+    cat >${overrides}<<EOF
+
+# There are no file conflicts across architectures for u-boot, as each
+# target is only installed on a single architecture. In theory, some
+# targets could be built on multiple architectures, but could instead install
+# the package for the architecture needed.
+EOF
+
+    sed -n "/^[a-z0-9].*[[:space:]]$subarch[[:space:]]/p" ${target_file} | while read arch subarch2 platform targets ; do
+        echo "${package} [${arch}]: arch-dependent-file-not-in-arch-specific-directory usr/lib/u-boot/${platform}/uboot.elf"
+    done >> ${overrides}
+
+    cat >>${overrides}<<EOF
+
+# These bootloaders need to be statically linked.
+EOF
+
+    sed -n "/^[a-z0-9].*[[:space:]]$subarch[[:space:]]/p" ${target_file} | while read arch subarch2 platform targets ; do
+        echo "${package} [${arch}]: statically-linked-binary usr/lib/u-boot/${platform}/uboot.elf"
+    done >> ${overrides}
+
+    cat >>${overrides}<<EOF
+
+${package}: description-synopsis-starts-with-article
+
+# Synopsys is the name of a company, not a misspelling.
+${package}: spelling-error-in-copyright Synopsys Synopsis
+EOF
+done
+
+package=u-boot-tools
+cat >debian/${package}.lintian-overrides<<EOF
+# Synopsys is the name of a company, not a misspelling.
+${package}: spelling-error-in-copyright Synopsys Synopsis
+EOF

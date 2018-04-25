@@ -1,0 +1,21 @@
+== Installation ==
+
+At this point, you must install U-Boot to flash yourself.
+
+MX53LOCO:
+
+ dd conv=fsync,notrunc bs=1024 if=u-boot.imx of=/dev/sdX seek=1
+
+wandboard (quad, dual-lite and solo):
+
+ dd conv=fsync,notrunc if=/usr/lib/u-boot/wandboard/SPL of=/dev/mmcblk0 bs=1k seek=1
+ dd conv=fsync,notrunc if=/usr/lib/u-boot/wandboard/u-boot.img of=/dev/mmcblk0 bs=1k seek=69
+
+mx6cuboxi (Cubox-i and Hummingboard):
+
+ dd conv=fsync,notrunc if=/usr/lib/u-boot/mx6cuboxi/SPL of=/dev/mmcblk0 bs=1k seek=1
+ dd conv=fsync,notrunc if=/usr/lib/u-boot/mx6cuboxi/u-boot.img of=/dev/mmcblk0 bs=1k seek=69
+
+== U-Boot environment tools ==
+
+fw_printenv / fw_setenv read /etc/fw_env.config for configuration.
