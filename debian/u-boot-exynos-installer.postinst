@@ -18,16 +18,6 @@ options=fsync,notrunc
 bootdev_priority="critical"
 default_dev="/dev/mmcblk0"
 
-for param in `cat /proc/cmdline | tr ' ' '\n'`; do
-	case $param in
-		root=*)
-			flash_bootloader ${param##root=} ${bl1} ${bl2} ${uboot}
-			exit $?
-			;;
-	esac
-done
-
-
 while :; do
 	DEVS="$(list-devices disk)"
 	devlist=
