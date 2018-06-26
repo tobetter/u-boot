@@ -1,3 +1,9 @@
+u-boot (2018.05+hkdk1) unstable; urgency=medium
+
+  * U-boot v2018.05
+
+ --  Dongjin Kim <tobetter@linuxfactory.or.kr>  Tue, 26 Jun 2018 23:59:03 +0900
+
 u-boot (2018.03+hkdk1) unstable; urgency=medium
 
   * U-boot v2018.03
