@@ -1,24 +1,20 @@
-TMPDIR="/tmp/u-boot"
-
 DOWNLOAD_URL="https://api.github.com/repos/hardkernel/u-boot/releases/latest"
-TARBALL_FILE="${TMPDIR}/odroid-n2.tar.gz"
-UBOOT_BINARY="${TMPDIR}/sd_fuse/u-boot.bin"
+TARBALL_FILE="/tmp/uboot.tar.gz"
+UBOOT_BINARY="/usr/lib/u-boot/odroid-n2/u-boot.bin"
 
 abort() {
-	rm -f ${TMPDIR}
 	echo $1
 	exit 1
 }
 
 download_binary()
 {
-	mkdir -p ${TMPDIR}
-	curl -sL ${DOWNLOAD_URL} | \
-		jq -r '.assets[].browser_download_url' | \
-		wget -qi - -O ${TARBALL_FILE} || abort "Failed to download"
+	mkdir -p ${binary_dir}
+	curl -sL ${DOWNLOAD_URL} | grep browser_download_url | \
+		cut -d'"' -f4 | wget -qi - -O ${TARBALL_FILE} || abort "Failed to download"
 
-	tar xzf ${TARBALL_FILE} -C ${TMPDIR}
-	[ -f ${UBOOT_BINARY} ] || abort XXXX
+	tar xzf ${TARBALL_FILE} -C ${binary_dir} --strip-components=1
+	[ -f ${UBOOT_BINARY} ] || abort "E: U-boot binary is missing"
 }
 
 flash_binary()
@@ -26,5 +22,5 @@ flash_binary()
 	dev=${1}
 	binary=${2}
 
-	echo dd if=${binary} of=${dev} conv=fsync,notrunc bs=512 seek=1
+	dd if=${binary} of=${dev} conv=fsync,notrunc bs=512 seek=1
 }

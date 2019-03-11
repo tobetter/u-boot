@@ -11,6 +11,7 @@ set -e
 
 mmc_devices="/dev/mmcblk0 /dev/mmcblk1"
 
+download_binary
 for dev in ${mmc_devices}; do
 	[ -e ${dev} ] && flash_binary ${dev} ${UBOOT_BINARY}
 done

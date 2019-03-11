@@ -8,7 +8,7 @@ Homepage: https://github.com/tobetter/u-boot
 
 Package: u-boot-odroidn2
 Architecture: arm64
-Depends: ${misc:Depends}, jq
+Depends: ${misc:Depends}
 Description: Boot script to initiate on the first boot
  This package will execute once on the first boot since installed.
 
@@ -17,7 +17,7 @@ Architecture: arm64
 Section: debian-installer
 Priority: standard
 Package-Type: udeb
-Depends: ${shlibs:Depens}, ${misc:Depends}, jq
+Depends: ${misc:Depends}
 XB-Installer-Menu-Item: 7300
 Description: Install U-boot to SD/eMMC
  This package will execute once on the first boot since installed.

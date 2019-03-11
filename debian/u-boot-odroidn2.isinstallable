@@ -7,15 +7,15 @@ set -e
 
 PROC_DTMODEL="/proc/device-tree/model"
 
-get_dt_mode() {
+get_dt_model() {
 	cat "${PROC_DTMODEL}"
 }
 
 case $(get_dt_model) in
 	"Hardkernel ODROID-N2")
-		exit 1
+		exit 0
 		;;
 	*)
-		exit 0
+		exit 1
 		;;
 esac
