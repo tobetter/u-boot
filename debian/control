@@ -1,0 +1,23 @@
+Source: u-boot-odroidn2
+Section: admin
+Priority: optional
+Maintainer: Dongjin Kim <tobetter@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: https://github.com/tobetter/u-boot
+
+Package: u-boot-odroidn2
+Architecture: arm64
+Depends: ${misc:Depends}, jq
+Description: Boot script to initiate on the first boot
+ This package will execute once on the first boot since installed.
+
+Package: u-boot-odroidn2-installer
+Architecture: arm64
+Section: debian-installer
+Priority: standard
+Package-Type: udeb
+Depends: ${shlibs:Depens}, ${misc:Depends}, jq
+XB-Installer-Menu-Item: 7300
+Description: Install U-boot to SD/eMMC
+ This package will execute once on the first boot since installed.
