@@ -3,15 +3,9 @@
 # Copyright (C) 2019 Dongjin Kim <tobetter@gmail.com>
 #
 
-set -e
-
-[ -z ${binary_dir} ] && binary_dir="/usr/lib/u-boot/odroid-n2"
-
-. ${binary_dir}/library.sh
-
-mmc_devices="/dev/mmcblk0 /dev/mmcblk1"
-
-download_binary
-for dev in ${mmc_devices}; do
-	[ -e ${dev} ] && flash_binary ${dev} ${UBOOT_BINARY}
-done
+log-output -t u-boot-odroidn2 chroot /target apt-get update
+log-output -t u-boot-odroidn2 chroot /target \
+	apt-get install -y u-boot-odroidn2 || bootloader_update_failed=$?
+if [ "${bootloader_update_failed}" ]; then
+	warning "U-boot update failed: ${bootloader_update_failed}"
+fi
