@@ -3,6 +3,7 @@
 # Copyright (C) 2019 Dongjin Kim <tobetter@gmail.com>
 #
 
+log-output -t u-boot-odroidn2 mount -t proc none /target/proc
 log-output -t u-boot-odroidn2 chroot /target apt-get update
 log-output -t u-boot-odroidn2 chroot /target \
 	apt-get install -y u-boot-odroidn2 bootscript-odroidn2 || bootloader_update_failed=$?
