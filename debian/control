@@ -9,8 +9,8 @@ Homepage: https://github.com/tobetter/u-boot
 Package: u-boot-odroidn2
 Architecture: arm64
 Depends: ${misc:Depends}, curl
-Description: Boot script to initiate on the first boot
- This package will execute once on the first boot since installed.
+Description: U-boot binaries for ODROID-N2
+ This package will install U-boot binaries to ODROID-N2.
 
 Package: u-boot-odroidn2-installer
 Architecture: arm64
@@ -20,4 +20,4 @@ Package-Type: udeb
 Depends: ${misc:Depends}
 XB-Installer-Menu-Item: 7300
 Description: Installing bootloader (U-boot)
- This package will execute once on the first boot since installed.
+ This package will install U-boot binaries to ODROID-N2.
