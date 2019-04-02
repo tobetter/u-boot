@@ -976,6 +976,18 @@ void set_vpp_lut(
 	}
 }
 
+int is_osd_high_version(void)
+{
+	u32 family_id = get_cpu_id().family_id;
+
+	if ((family_id == MESON_CPU_MAJOR_ID_G12A) ||
+		(family_id == MESON_CPU_MAJOR_ID_G12B) ||
+			(family_id >= MESON_CPU_MAJOR_ID_SM1))
+		return 1;
+	else
+		return 0;
+}
+
  /*
 for G12A, set osd2 matrix(10bit) RGB2YUV
  */
@@ -983,9 +995,7 @@ for G12A, set osd2 matrix(10bit) RGB2YUV
  {
 	int *m = NULL;
 
-	if ((get_cpu_id().family_id == MESON_CPU_MAJOR_ID_G12A) ||
-	    (get_cpu_id().family_id == MESON_CPU_MAJOR_ID_G12B) ||
-	    (get_cpu_id().family_id == MESON_CPU_MAJOR_ID_TL1)) {
+	if (is_osd_high_version()) {
 		/* RGB -> 709 limit */
 		m = RGB709_to_YUV709l_coeff;
 
@@ -1045,9 +1055,7 @@ static void set_osd2_rgb2yuv(bool on)
 {
 	int *m = NULL;
 
-	if ((get_cpu_id().family_id == MESON_CPU_MAJOR_ID_G12A) ||
-	    (get_cpu_id().family_id == MESON_CPU_MAJOR_ID_G12B) ||
-	    (get_cpu_id().family_id == MESON_CPU_MAJOR_ID_TL1)) {
+	if (is_osd_high_version()) {
 		/* RGB -> 709 limit */
 		m = RGB709_to_YUV709l_coeff;
 
@@ -1085,8 +1093,7 @@ static void set_osd3_rgb2yuv(bool on)
 {
 	int *m = NULL;
 
-	if ((get_cpu_id().family_id == MESON_CPU_MAJOR_ID_G12A) ||
-		(get_cpu_id().family_id == MESON_CPU_MAJOR_ID_G12B)){
+	if (is_osd_high_version()) {
 		/* RGB -> 709 limit */
 		m = RGB709_to_YUV709l_coeff;
 
@@ -1134,9 +1141,7 @@ static void set_vpp_bitdepth(void)
 		vpp_reg_setb(VPP_DAT_CONV_PARA1, 0, 0, 14);
 	#else
 	#endif
-	} else if ((get_cpu_id().family_id == MESON_CPU_MAJOR_ID_G12A) ||
-		   (get_cpu_id().family_id == MESON_CPU_MAJOR_ID_G12B) ||
-		   (get_cpu_id().family_id == MESON_CPU_MAJOR_ID_TL1)) {
+	} else if (is_osd_high_version()) {
 		/*after this step vd1 output data is U12,*/
 		vpp_reg_write(DOLBY_PATH_CTRL, 0xf);
 	}
