@@ -390,7 +390,7 @@
 	BOOTENV_SHARED_EFI \
 	BOOTENV_SHARED_VIRTIO \
 	"boot_prefixes=/ /boot/\0" \
-	"boot_scripts=boot.scr.uimg boot.scr\0" \
+	"boot_scripts=boot.ini boot.scr.uimg boot.scr\0" \
 	"boot_script_dhcp=boot.scr.uimg\0" \
 	BOOTENV_BOOT_TARGETS \
 	\

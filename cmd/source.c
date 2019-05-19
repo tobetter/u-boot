@@ -21,6 +21,7 @@
 #include <mapmem.h>
 #include <asm/byteorder.h>
 #include <asm/io.h>
+#include <linux/ctype.h>
 
 #if defined(CONFIG_FIT)
 /**
@@ -40,6 +41,23 @@ static const char *get_default_image(const void *fit)
 }
 #endif
 
+static
+int check_odroid_script(ulong addr, char *product)
+{
+	int i;
+	char *buf;
+	char magic[32];
+	int size = snprintf(magic, sizeof(magic), "%s-uboot-config", product);
+
+	buf = map_sysmem(addr, 0);
+	for (i = 0; i < size; i++) {
+		if (magic[i] != tolower(buf[i]))
+			return -EINVAL;
+	}
+
+	return size;
+}
+
 int
 source (ulong addr, const char *fit_uname)
 {
@@ -56,6 +74,7 @@ source (ulong addr, const char *fit_uname)
 	const void	*fit_data;
 	size_t		fit_len;
 #endif
+	int		size;
 
 	verify = env_get_yesno("verify");
 
@@ -150,8 +169,14 @@ source (ulong addr, const char *fit_uname)
 		break;
 #endif
 	default:
-		puts ("Wrong image format for \"source\" command\n");
-		return 1;
+		size = check_odroid_script(addr, "odroidxu4");
+		if (size > 0) {
+			data = (u32*)(addr + size);
+			len = simple_strtoul(env_get("filesize"), NULL, 16);
+		} else {
+			puts ("Wrong image format for \"source\" command\n");
+			return 1;
+		}
 	}
 
 	debug ("** Script length: %ld\n", len);
