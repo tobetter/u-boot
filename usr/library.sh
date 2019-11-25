@@ -24,3 +24,21 @@ flash_binary()
 
 	dd if=${binary} of=${dev} conv=fsync,notrunc bs=512 seek=1
 }
+
+find_root_device()
+{
+	for p in $(cat /proc/cmdline); do
+		case $p in
+			root=UUID=*)
+				uuid=${p#root=UUID=}
+				if [ "x${uuid}" != "x" ]; then
+					dev=$(blkid | grep ${uuid} | cut -d':' -f1)
+					echo ${dev%p*}
+					return
+				fi
+				;;
+			*)
+				;;
+		esac
+	done
+}
