@@ -1,0 +1,7 @@
+# ARCH	subarch		platform	target
+# --------------------------------------------
+# Joost van Zwieten <joostvanzwieten@gmail.com>, Odroid-U3
+armhf	exynos		odroid		u-boot.bin
+
+# Vagrant Cascadian <vagrant@debian.org>, Odroid-XU4
+armhf	exynos		odroid-xu3	u-boot.bin bl1.bin.hardkernel bl2.bin.hardkernel.1mb_uboot tzsw.bin.hardkernel

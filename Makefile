@@ -882,6 +882,13 @@ ifneq ($(BUILD_ROM)$(CONFIG_BUILD_ROM),)
 ALL-$(CONFIG_X86_RESET_VECTOR) += u-boot.rom
 endif
 
+ALL-$(CONFIG_TARGET_ODROID_XU3) += bl1.bin.hardkernel \
+	bl2.bin.hardkernel.1mb_uboot \
+	tzsw.bin.hardkernel
+
+bl1.bin.hardkernel bl2.bin.hardkernel.1mb_uboot tzsw.bin.hardkernel:
+	cp $(srctree)/board/hardkernel/odroid-xu3/$@ .
+
 # Build a combined spl + u-boot image for sunxi
 ifeq ($(CONFIG_ARCH_SUNXI)$(CONFIG_SPL),yy)
 ALL-y += u-boot-sunxi-with-spl.bin

@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# Copyright (C) 2019 Dongjin Kim <tobetter@gmail.com>
+#
+
+set -e
+
+. /usr/lib/u-boot/library.sh
+
+case "$1" in
+	configure)
+		if [ "x$BOOT_DEVICE" = "x" ]; then
+			dev=$(lookup_by_mount "/target")
+			[ "x$dev" = "x" ] && dev=$(lookup_by_mount " / ")
+		else
+			dev=$BOOT_DEVICE
+		fi
+
+		case $dev in
+			"/dev/mmcblk"*)
+				do_fusing $dev
+				;;
+			*)
+				warning "Invalid target device."
+				;;
+		esac
+		;;
+	*)
+		exit 0
+		;;
+esac
