@@ -40,11 +40,7 @@ configs/am335x_boneblack_defconfig:
 
 override_dh_auto_build-arch: TOOLSDIR := debian/build/tools
 override_dh_auto_build-arch: TARGETARCH := $(DEB_HOST_ARCH)
-ifeq (,$(filter pkg.uboot.notools,$(DEB_BUILD_PROFILES)))
-override_dh_auto_build-arch: build-targets build-tools
-else
 override_dh_auto_build-arch: build-targets
-endif
 
 override_dh_auto_build-indep: TOOLSDIR := debian/build/tools
 override_dh_auto_build-indep: TARGETARCH := all
