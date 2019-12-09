@@ -1,2 +1,3 @@
 #!/bin/sh
 debian/bin/u-boot-install-targets exynos "doc/README.odroid"
+echo board/hardkernel/library.sh /usr/lib/u-boot/
