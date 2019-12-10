@@ -6,7 +6,6 @@ Uploaders: Loïc Minier <lool@debian.org>, Clint Adams <clint@debian.org>
 Build-Depends:
  bc,
  bison,
- debhelper-compat (= 11),
  device-tree-compiler,
  dpkg-dev (>= 1.17.14),
  flex,
@@ -20,7 +19,6 @@ Build-Depends:
  skales:native [arm64],
  swig [linux-any],
  lzop [armhf] <!cross> | lzop:native [armhf] <cross>,
-Rules-Requires-Root: no
 Standards-Version: 4.4.1
 Homepage: http://www.denx.de/wiki/U-Boot/
 Vcs-Browser: https://salsa.debian.org/debian/u-boot
