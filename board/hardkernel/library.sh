@@ -39,10 +39,10 @@ do_fusing_exynos5422() {
 		device=$1
 	fi
 
-	dd iflag=dsync oflag=dsync if=$bindir/bl1.bin.hardkernel of=$device seek=$bl1_position
-	dd iflag=dsync oflag=dsync if=$bindir/bl2.bin.hardkernel.1mb_uboot of=$device seek=$bl2_position
-	dd iflag=dsync oflag=dsync if=$bindir/tzsw.bin.hardkernel of=$device seek=$tzsw_position
-	dd iflag=dsync oflag=dsync if=$bindir/u-boot.bin of=$device seek=$uboot_position
+	dd if=$bindir/bl1.bin.hardkernel of=$device seek=$bl1_position conv=fsync
+	dd if=$bindir/bl2.bin.hardkernel.1mb_uboot of=$device seek=$bl2_position conv=fsync
+	dd if=$bindir/tzsw.bin.hardkernel of=$device seek=$tzsw_position conv=fsync
+	dd if=$bindir/u-boot.bin of=$device seek=$uboot_position conv=fsync
 
 	if [ -d /sys/block/${1##*/}boot0 ]; then
 		echo -n 1 | tee /sys/block/${1##*/}boot0/force_ro || \
