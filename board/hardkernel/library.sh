@@ -24,7 +24,7 @@ do_fusing_exynos5422() {
 
 	if [ -d /sys/block/${1##*/}boot0 ]; then
 		echo "$1 is an eMMC card, disabling ${1##*/}boot0 ro"
-		echo -n 0 | tee /sys/block/${1##*/}boot0/force_ro || \
+		echo -n 0 > /sys/block/${1##*/}boot0/force_ro || \
 			warning "Enabling r/w for $1boot0 failed"
 		bl1_position=0
 		bl2_position=30
@@ -45,7 +45,7 @@ do_fusing_exynos5422() {
 	dd if=$bindir/u-boot.bin of=$device seek=$uboot_position conv=fsync
 
 	if [ -d /sys/block/${1##*/}boot0 ]; then
-		echo -n 1 | tee /sys/block/${1##*/}boot0/force_ro || \
+		echo -n 1 > /sys/block/${1##*/}boot0/force_ro || \
 			warning "Enabling r/w for $1boot0 failed"
 	fi
 
