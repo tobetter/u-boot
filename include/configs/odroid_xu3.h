@@ -28,6 +28,37 @@
 #define CONFIG_ENV_SIZE			(SZ_1K * 16)
 #define CONFIG_ENV_OFFSET		(SZ_1K * 3136) /* ~3 MiB offset */
 
+/* Fastboot SDMMC Partition Table for ODROID(Exynos5422) */
+
+/* BL1          BLK#: 1    (0x0001)  ~    30 (0x001E) */
+/* BL2          BLK#: 31   (0x001F)  ~    62 (0x003E) */
+/* UBOOT        BLK#: 63   (0x003F)  ~  1502 (0x05DE) */
+/* TZSW         BLK#: 1503 (0x05DF)  ~  2014 (0x07DE) */
+/* UBOOT ENV    BLK#: 2015 (0x07DF)  ~  2046 (0x07FE) */
+/* KERNEL       BLK#: 2047 (0x07DF)  ~ 18430 (0x47FE) */
+#define UBOOT_ENV_ERASE							\
+	"mw.l ${loadaddr} 0 4000;"					\
+	"mmc dev 0;  mmc write ${loadaddr} 0x07df 0x0020;mmc dev 0\0"
+
+#define UBOOT_COPY_SD2EMMC						\
+	"mmc dev 0;"			\
+		"mmc read ${loadaddr} 0x0001 0x07de;
+	"mmc dev 1;
+		"emmc open 1;"	\
+		"mmc write ${loadaddr} 0x0000 0x07de;
+		"emmc close 1;
+		"mmc write ${loadaddr} 0x07df 0x0020;"
+		"mmc dev 0\0"   
+
+#define UBOOT_COPY_EMMC2SD				\
+	"mmc dev 0;"					\
+		"emmc open 0;				\
+		"mmc read  ${loadaddr} 0x0000 0x07de;	\
+		"emmc close 0;"				\
+	"mmc dev 1;					\
+		"mmc write ${loadaddr} 0x0001 0x07de;	\
+		"mmc write ${loadaddr} 0x07df 0x0020;\0"
+
 #define CONFIG_SYS_INIT_SP_ADDR		(CONFIG_SYS_LOAD_ADDR - 0x1000000)
 
 #define CONFIG_DEFAULT_CONSOLE		"console=ttySAC2,115200n8\0"

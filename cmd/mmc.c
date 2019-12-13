@@ -983,3 +983,70 @@ U_BOOT_CMD(
 	"display MMC info",
 	"- display info of the current MMC device"
 );
+
+static int do_emmc(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
+{
+	int rc = 0;
+
+	if (argc != 3)
+		return  CMD_RET_USAGE;
+
+	if (strcmp(argv[1], "open") == 0) {
+		int dev = simple_strtoul(argv[2], NULL, 10);
+		struct mmc *mmc = find_mmc_device(dev);
+
+		if (!mmc)
+			goto out;
+
+		if (IS_SD(mmc)) {
+			printf("MMC%d device is SD.!!\n", dev);
+			return  CMD_RET_FAILURE;
+		}
+
+		rc = emmc_boot_open(mmc);
+
+		if (rc == 0) {
+			printf("eMMC OPEN Success.!!\n");
+			printf("\t\t\t!!!Notice!!!\n");
+			printf("!You must close eMMC boot Partition after all image writing!\n");
+			printf("!eMMC boot partition has continuity at image writing time.!\n");
+			printf("!So, Do not close boot partition, Before, all images is written.!\n");
+		} else {
+			printf("eMMC OPEN Failed.!!\n");
+			return  CMD_RET_FAILURE;
+		}
+	} else if (strcmp(argv[1], "close") == 0) {
+		int dev = simple_strtoul(argv[2], NULL, 10);
+		struct mmc *mmc = find_mmc_device(dev);
+
+		if (!mmc)
+			goto out;
+
+		if (IS_SD(mmc)) {
+			printf("MMC%d device is SD.!!\n", dev);
+			return  CMD_RET_FAILURE;
+		}
+
+		rc = emmc_boot_close(mmc);
+
+		if (rc == 0) {
+			printf("eMMC CLOSE Success.!!\n");
+		} else {
+			printf("eMMC CLOSE Failed.!!\n");
+			return  CMD_RET_FAILURE;
+		}
+	} else {
+		goto out;
+	}
+	return  CMD_RET_SUCCESS;
+out:
+	puts("No MMC device available\n");
+	return  CMD_RET_FAILURE;
+}
+
+U_BOOT_CMD(
+	emmc, 3, 0, do_emmc,
+	"Open/Close eMMC boot partition",
+	"open <device_num> \n"
+	"emmc close <device_num> \n"
+);
