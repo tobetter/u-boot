@@ -56,5 +56,6 @@ find_root_device()
 		[ "x${dev}" = "x" ] && dev=$(lookup_by_mount "/")
 	fi
 
+	dev=$(readlink -f ${dev})
 	echo ${dev%p*}
 }
