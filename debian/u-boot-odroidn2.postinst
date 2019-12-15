@@ -9,15 +9,25 @@ set -x
 
 . ${binary_dir}/library.sh
 
-device=$(find_root_device)
+case "$1" in
+	install)
+		echo "$1 install"
+		;;
+	configure)
+		device=$(find_root_device)
 
-case ${device} in
-	/dev/mmcblk0 | /dev/mmcblk1)
-		download_binary
-		if [ -e ${device} ]; then
-			flash_binary ${device} ${UBOOT_BINARY}
-		fi
+		case ${device} in
+			"/dev/mmcblk0"*)
+				download_binary
+				if [ -e ${device} ]; then
+					flash_binary ${device} ${UBOOT_BINARY}
+				fi
+				;;
+			*)
+				;;
+		esac
 		;;
 	*)
+		exit 0
 		;;
 esac

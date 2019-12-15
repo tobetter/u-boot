@@ -25,20 +25,36 @@ flash_binary()
 	dd if=${binary} of=${dev} conv=fsync,notrunc bs=512 seek=1
 }
 
+lookup_by_mount() {
+	local mount=$(grep "\ $1\ " /proc/mounts | cut -d' ' -f1)
+	echo ${mount%p*}
+}
+
 find_root_device()
 {
+	if [ "x$BOOT_DEVICE" != "x" ]; then
+		echo ${BOOT_DEVICE}
+		return
+	fi
+
 	for p in $(cat /proc/cmdline); do
 		case $p in
 			root=UUID=*)
 				uuid=${p#root=UUID=}
 				if [ "x${uuid}" != "x" ]; then
 					dev=$(blkid | grep ${uuid} | cut -d':' -f1)
-					echo ${dev%p*}
-					return
+					break
 				fi
 				;;
 			*)
 				;;
 		esac
 	done
+
+	if [ "x${dev}" = "x" ]; then
+		dev=$(lookup_by_mount "/target")
+		[ "x${dev}" = "x" ] && dev=$(lookup_by_mount "/")
+	fi
+
+	echo ${dev%p*}
 }
