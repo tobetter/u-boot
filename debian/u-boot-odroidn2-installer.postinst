@@ -12,5 +12,5 @@ log-output -t u-boot-odroidn2 chroot /target \
 	BOOT_DEVICE=${root_device} \
 	apt-get install -y u-boot-odroidn2 bootscript-odroidn2 || bootloader_update_failed=$?
 if [ "${bootloader_update_failed}" ]; then
-	warning "U-boot update failed: ${bootloader_update_failed}"
+	log-output -t u-boot-odroidn2 echo "warning: U-boot update failed: ${bootloader_update_failed}"
 fi
