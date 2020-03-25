@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# Copyright (C) 2019 Dongjin Kim <tobetter@gmail.com>
+#
+
+rootfs=$(mount | grep "on /target " | cut -d' ' -f1)
+root_device=$(readlink -f ${rootfs%p*})
+
+log-output -t u-boot-odroidgo2 mount -t proc none /target/proc
+log-output -t u-boot-odroidgo2 chroot /target apt-get update
+log-output -t u-boot-odroidgo2 chroot /target \
+	BOOT_DEVICE=${root_device} \
+	apt-get install -y u-boot-odroidgo2 bootscript-odroidgo2 || bootloader_update_failed=$?
+if [ "${bootloader_update_failed}" ]; then
+	log-output -t u-boot-odroidgo2 echo "warning: U-boot update failed: ${bootloader_update_failed}"
+fi

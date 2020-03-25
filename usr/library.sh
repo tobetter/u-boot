@@ -1,6 +1,6 @@
 DOWNLOAD_URL="https://api.github.com/repos/hardkernel/u-boot/releases/latest"
 TARBALL_FILE="/tmp/uboot.tar.gz"
-UBOOT_BINARY="/usr/lib/u-boot/odroid-n2/u-boot.bin"
+UBOOT_BINARY="/usr/lib/u-boot/odroid-go2/u-boot.bin"
 
 abort() {
 	echo $1

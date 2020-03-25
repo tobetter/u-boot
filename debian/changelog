@@ -1,3 +1,9 @@
+u-boot-odroidgo2 (2017.09) stable; urgency=medium
+
+  * Package reset to 'u-boot-odroidgo2'
+
+ -- Dongjin Kim <tobetter@gmail.com>  Wed, 25 Mar 2020 16:39:38 +0900
+
 u-boot-odroidn2 (2015.01) stable; urgency=medium
 
   * Initial release.

@@ -5,7 +5,7 @@
 
 set -x
 
-[ -z ${binary_dir} ] && binary_dir="/usr/lib/u-boot/odroid-n2"
+[ -z ${binary_dir} ] && binary_dir="/usr/lib/u-boot/odroid-go2"
 
 . ${binary_dir}/library.sh
 
