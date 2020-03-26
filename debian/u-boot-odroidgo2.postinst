@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# Copyright (C) 2020 Dongjin Kim <tobetter@gmail.com>
+#
+
+set -e
+
+. /usr/lib/u-boot/library.sh
+
+case "$1" in
+	install)
+		echo "$1 install"
+		;;
+	configure)
+		device=${BOOT_DEVICE}
+		[ "x${device}" = "x" ] && device=$(find_root_device)
+		[ "x${device}" = "x" ] || flash_binary ${device} odroidgo2
+		;;
+	*)
+		exit 0
+		;;
+esac

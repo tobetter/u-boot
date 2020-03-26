@@ -1,23 +1,53 @@
-Source: u-boot-odroidn2
+Source: u-boot-odroid
 Section: admin
 Priority: optional
 Maintainer: Dongjin Kim <tobetter@gmail.com>
-Build-Depends: debhelper (>= 8.0.0)
+Build-Depends: debhelper (>= 8.0.0), curl, wget
 Standards-Version: 3.9.3
 Homepage: https://github.com/tobetter/u-boot
 
-Package: u-boot-odroidn2
-Architecture: arm64
-Depends: ${misc:Depends}, curl
-Description: U-boot binaries for ODROID-N2
- This package will install U-boot binaries to ODROID-N2.
+Package: u-boot-odroid
+Architecture: armhf arm64
+Depends: ${misc:Depends}, curl, wget
+Description: U-boot binaries for ODROID
+ This package will install U-boot common library.
 
-Package: u-boot-odroidn2-installer
-Architecture: arm64
+Package: u-boot-odroid-installer
+Architecture: armhf arm64
 Section: debian-installer
 Priority: standard
 Package-Type: udeb
 Depends: ${misc:Depends}
 XB-Installer-Menu-Item: 7300
 Description: Installing bootloader (U-boot)
+ This package will install U-boot common library.
+
+Package: u-boot-odroidc2
+Architecture: arm64
+Depends: ${misc:Depends}, u-boot-odroid
+Description: U-boot binaries for ODROID-C2
+ This package will install U-boot binaries to ODROID-C2.
+
+Package: u-boot-odroidc4
+Architecture: arm64
+Depends: ${misc:Depends}, u-boot-odroid
+Description: U-boot binaries for ODROID-C4
+ This package will install U-boot binaries to ODROID-C4.
+
+Package: u-boot-odroidn2
+Architecture: arm64
+Depends: ${misc:Depends}, u-boot-odroid
+Description: U-boot binaries for ODROID-N2
  This package will install U-boot binaries to ODROID-N2.
+
+Package: u-boot-odroidgo2
+Architecture: arm64
+Depends: ${misc:Depends}, u-boot-odroid
+Description: U-boot binaries for ODROID-GO2
+ This package will install U-boot binaries to ODROID-GO2.
+
+Package: u-boot-odroidxu3
+Architecture: armhf
+Depends: ${misc:Depends}, u-boot-odroid
+Description: U-boot binaries for ODROID-XU3/4
+ This package will install U-boot binaries to ODROID-XU3/4.

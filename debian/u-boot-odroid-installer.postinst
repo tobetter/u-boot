@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# Copyright (C) 2020 Dongjin Kim <tobetter@gmail.com>
+#
+
+. /usr/lib/u-boot/library.sh
+
+model=$(model_simple)
+if [ "x${model}" = "" ]; then
+	log-output -t u-boot-odroid echo "warning: unknown device"
+	exit 1
+fi
+
+m=$(lookup_by_mount "/target")
+device=$(readlink -f ${m%p*})
+
+log-output -t u-boot-odroid mount -t proc none /target/proc
+log-output -t u-boot-odroid chroot /target apt-get update
+log-output -t u-boot-odroid BOOT_DEVICE=${device} chroot /target \
+	apt-get install -y u-boot-${model} bootscript-${model} || bootloader_update_failed=$?
+if [ "${bootloader_update_failed}" ]; then
+	log-output -t u-boot-odroid echo "warning: U-boot update failed: ${bootloader_update_failed}"
+fi

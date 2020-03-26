@@ -1,0 +1,8 @@
+#!/bin/sh
+
+target=$1
+
+for i in `ls -1 usr/lib/u-boot/${target}`; do
+	echo usr/lib/u-boot/${target}/$i \
+		     /usr/lib/u-boot/${target}
+done

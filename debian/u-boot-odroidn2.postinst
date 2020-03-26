@@ -1,31 +1,20 @@
 #!/bin/sh
 #
-# Copyright (C) 2019 Dongjin Kim <tobetter@gmail.com>
+# Copyright (C) 2020 Dongjin Kim <tobetter@gmail.com>
 #
 
-set -x
+set -e
 
-[ -z ${binary_dir} ] && binary_dir="/usr/lib/u-boot/odroid-n2"
-
-. ${binary_dir}/library.sh
+. /usr/lib/u-boot/library.sh
 
 case "$1" in
 	install)
 		echo "$1 install"
 		;;
 	configure)
-		device=$(find_root_device)
-
-		case ${device} in
-			"/dev/mmcblk0"*)
-				download_binary
-				if [ -e ${device} ]; then
-					flash_binary ${device} ${UBOOT_BINARY}
-				fi
-				;;
-			*)
-				;;
-		esac
+		device=${BOOT_DEVICE}
+		[ "x${device}" = "x" ] && device=$(find_root_device)
+		[ "x${device}" = "x" ] || flash_binary ${device} odroidn2
 		;;
 	*)
 		exit 0

@@ -1,5 +1,5 @@
-u-boot-odroidn2 (2015.01) stable; urgency=medium
+u-boot-odroid (2020.03) stable; urgency=medium
 
   * Initial release.
 
- -- Dongjin Kim <tobetter@gmail.com>  Mon, 11 Mar 2019 05:55:12 -0400
+ -- Dongjin Kim <tobetter@gmail.com>  Sat, 28 Mar 2020 04:57:52 +0900

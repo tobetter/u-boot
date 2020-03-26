@@ -1,1 +1,6 @@
-usr/library.sh			/usr/lib/u-boot/odroid-n2/
+#!/bin/sh
+#
+# Copyright (C) 2020 Dongjin Kim <tobetter@gmail.com>
+#
+
+debian/bin/u-boot-install-targets odroidn2

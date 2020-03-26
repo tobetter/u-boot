@@ -1,0 +1,39 @@
+#!/bin/sh
+
+target=$1
+
+cat>debian/u-boot-${target}.install<<__EOF
+#!/bin/sh
+#
+# Copyright (C) 2020 Dongjin Kim <tobetter@gmail.com>
+#
+
+debian/bin/u-boot-install-targets ${target}
+__EOF
+
+cat>debian/u-boot-${target}.postinst<<__EOF
+#!/bin/sh
+#
+# Copyright (C) 2020 Dongjin Kim <tobetter@gmail.com>
+#
+
+set -e
+
+. /usr/lib/u-boot/library.sh
+
+case "\$1" in
+	install)
+		echo "\$1 install"
+		;;
+	configure)
+		device=\${BOOT_DEVICE}
+		[ "x\${device}" = "x" ] && device=\$(find_root_device)
+		[ "x\${device}" = "x" ] || flash_binary \${device} ${target}
+		;;
+	*)
+		exit 0
+		;;
+esac
+__EOF
+
+chmod +x debian/u-boot-${target}.install
