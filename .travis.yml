@@ -41,7 +41,8 @@ script:
   - make
 
 before_deploy:
-  - export RELEASE_VERSION="${TARGET_BOARD}-${TRAVIS_BUILD_NUMBER}"
+  - export BOARD=$(echo ${TARGET_BOARD} | tr -d '-')
+  - export RELEASE_VERSION="${BOARD}-${TRAVIS_BUILD_NUMBER}"
   - tar czf u-boot-${RELEASE_VERSION}.tar.gz sd_fuse/*
   - git config --global user.name ${GIT_USER_NAME}
   - git config --global user.email ${GIT_USER_EMAIL}
