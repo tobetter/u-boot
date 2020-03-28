@@ -33,5 +33,8 @@ $(srctree)/sd_fuse/u-boot.bin: u-boot.bin
 		$(BOARD_DIR)/u-boot.bin.bundle \
 		$(BOARD_DIR)/u-boot.bin.signed >/dev/null
 	dd if=$(BOARD_DIR)/u-boot.bin.signed of=$@ bs=512 skip=96
+	ls -l $(BOARD_DIR)
+	ls -l $(BOARD_DIR)/fip
+	ls -l $(BOARD_DIR)/fip/gxb
 
 all: $(srctree)/sd_fuse/u-boot.bin $(targets)
