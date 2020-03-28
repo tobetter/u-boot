@@ -26,12 +26,15 @@ $(srctree)/sd_fuse/u-boot.bin: u-boot.bin
 		$(BOARD_DIR)/u-boot.bin.fip
 	$(BOARD_DIR)/fip_create/fip_create --dump \
 		$(BOARD_DIR)/u-boot.bin.fip
-	cat $(BOARD_DIR)/fip/gxb/bl2.package \
+	cat $(BOARD_DIR)/fip/gxb/bl2.bin \
 		$(BOARD_DIR)/u-boot.bin.fip \
 		> $(BOARD_DIR)/u-boot.bin.bundle
 	$(BOARD_DIR)/meson-tools/amlbootsig \
 		$(BOARD_DIR)/u-boot.bin.bundle \
 		$(BOARD_DIR)/u-boot.bin.signed >/dev/null
 	dd if=$(BOARD_DIR)/u-boot.bin.signed of=$@ bs=512 skip=96
+	ls -l $(BOARD_DIR)
+	ls -l $(BOARD_DIR)/fip
+	ls -l $(BOARD_DIR)/fip/gxb
 
 all: $(srctree)/sd_fuse/u-boot.bin $(targets)
