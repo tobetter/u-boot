@@ -17,7 +17,7 @@ cat>debian/u-boot-${target}.postinst<<__EOF
 # Copyright (C) 2020 Dongjin Kim <tobetter@gmail.com>
 #
 
-set -e
+set -x
 
 . /usr/lib/u-boot/library.sh
 
@@ -34,6 +34,17 @@ case "\$1" in
 		exit 0
 		;;
 esac
+
+exit 0
+__EOF
+
+cat>debian/u-boot-${target}.prerm<<__EOF
+#!/bin/sh
+#
+# Copyright (C) 2020 Dongjin Kim <tobetter@gmail.com>
+#
+
+rm -f /usr/lib/u-boot/${target}/files.md5sum
 __EOF
 
 chmod +x debian/u-boot-${target}.install

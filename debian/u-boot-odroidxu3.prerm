@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# Copyright (C) 2020 Dongjin Kim <tobetter@gmail.com>
+#
+
+rm -f /usr/lib/u-boot/odroidxu3/files.md5sum

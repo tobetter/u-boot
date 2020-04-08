@@ -18,8 +18,10 @@ mv /target/etc/apt/apt.conf.d/*command-not-found /tmp
 
 log-output -t u-boot-odroid mount -t proc none /target/proc
 log-output -t u-boot-odroid chroot /target apt-get update
-log-output -t u-boot-odroid BOOT_DEVICE=${device} chroot /target \
-	apt-get install -y u-boot-${model} bootscript-${model} || bootloader_update_failed=$?
+log-output -t u-boot-odroid chroot /target apt-get install -y bootscript-${model}
+log-output -t u-boot-odroid chroot /target \
+	/bin/sh -c "BOOT_DEVICE=${device} apt-get install -y u-boot-${model}" \
+		|| bootloader_update_failed=$?
 if [ "${bootloader_update_failed}" ]; then
 	log-output -t u-boot-odroid echo "warning: U-boot update failed: ${bootloader_update_failed}"
 fi

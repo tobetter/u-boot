@@ -29,6 +29,8 @@ for board in ${boards}; do
 
 		git add usr/lib/u-boot/${board}
 		git add debian/u-boot-${board}.*
+
+		debian/bin/build_targets ${board}
 	fi
 done
 

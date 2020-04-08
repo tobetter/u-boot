@@ -8,7 +8,7 @@ Homepage: https://github.com/tobetter/u-boot
 
 Package: u-boot-odroid
 Architecture: armhf arm64
-Depends: ${misc:Depends}, curl, wget
+Depends: ${misc:Depends}, curl, wget, odroid-base
 Description: U-boot binaries for ODROID
  This package will install U-boot common library.
 

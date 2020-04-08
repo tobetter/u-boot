@@ -33,6 +33,7 @@ flash_binary()
 	target=${2}
 	path=/usr/lib/u-boot/${target}
 
+	echo -- ${path}/sd_fusing.sh
 	[ -f ${path}/sd_fusing.sh ] || return
 
 	case ${device} in /dev/mmcblk*)

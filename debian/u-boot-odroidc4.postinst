@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Dongjin Kim <tobetter@gmail.com>
 #
 
-set -e
+set -x
 
 . /usr/lib/u-boot/library.sh
 
@@ -20,3 +20,5 @@ case "$1" in
 		exit 0
 		;;
 esac
+
+exit 0
