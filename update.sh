@@ -11,7 +11,7 @@ get_url() {
 	echo $(curl -sL ${download_url} ${TOKEN} | tr -d '"' \
 		| grep browser_download_url \
 		| sed -n -e 's/^.*browser_download_url: //p' \
-		| grep ${1} \
+		| grep travis\/${1} | grep u-boot-${1} \
 		| sort -rV \
 		| head -1)
 }
