@@ -4,6 +4,7 @@
 #
 
 . /usr/lib/u-boot/library.sh
+. /usr/lib/odroid-base-installer/library.sh
 
 model=$(model_simple)
 if [ "x${model}" = "" ]; then
@@ -18,7 +19,7 @@ mv /target/etc/apt/apt.conf.d/*command-not-found /tmp
 
 log-output -t u-boot-odroid mount -t proc none /target/proc
 log-output -t u-boot-odroid chroot /target apt-get update
-log-output -t u-boot-odroid chroot /target apt-get install -y bootscript-${model}
+log-output -t u-boot-odroid chroot /target apt-get install -y $(default_bootscript_package)
 log-output -t u-boot-odroid chroot /target \
 	/bin/sh -c "BOOT_DEVICE=${device} apt-get install -y u-boot-${model}" \
 		|| bootloader_update_failed=$?
