@@ -1,3 +1,9 @@
+u-boot-odroid (2020.08) stable; urgency=medium
+
+  * Add new boards
+
+ -- Dongjin Kim <tobetter@gmail.com>  Tue, 18 Aug 2020 19:02:45 +0900
+
 u-boot-odroid (2020.03) stable; urgency=medium
 
   * Initial release.
