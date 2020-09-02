@@ -15,7 +15,9 @@ fi
 m=$(lookup_by_mount "/target")
 device=$(readlink -f ${m%p*})
 
-mv /target/etc/apt/apt.conf.d/*command-not-found /tmp
+if [ -d /target/etc/apt/apt.conf.d/*command-not-found ]; then
+	mv /target/etc/apt/apt.conf.d/*command-not-found /tmp
+fi
 
 log-output -t u-boot-odroid mount -t proc none /target/proc
 log-output -t u-boot-odroid chroot /target apt-get update
@@ -27,4 +29,6 @@ if [ "${bootloader_update_failed}" ]; then
 	log-output -t u-boot-odroid echo "warning: U-boot update failed: ${bootloader_update_failed}"
 fi
 
-mv -f /tmp/*command-not-found /target/etc/apt/apt.conf.d/
+if [ -d /tmp/*command-not-found ]; then
+	mv -f /tmp/*command-not-found /target/etc/apt/apt.conf.d/
+fi
