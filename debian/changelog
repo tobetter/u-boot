@@ -1,3 +1,9 @@
+u-boot-odroid (2020.09) stable; urgency=medium
+
+  * BUMP 2020.09
+
+ -- Dongjin Kim <tobetter@gmail.com>  Wed, 02 Sep 2020 14:22:29 +0900
+
 u-boot-odroid (2020.08) stable; urgency=medium
 
   * Add new boards
