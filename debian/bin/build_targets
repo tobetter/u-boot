@@ -17,7 +17,7 @@ cat>debian/u-boot-${target}.postinst<<__EOF
 # Copyright (C) 2020 Dongjin Kim <tobetter@gmail.com>
 #
 
-set -x
+#set -x
 
 . /usr/lib/u-boot/library.sh
 
