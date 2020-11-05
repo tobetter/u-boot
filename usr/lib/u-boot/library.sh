@@ -3,30 +3,6 @@ abort() {
 	exit 1
 }
 
-get_dt_model() {
-	cat /proc/device-tree/model
-}
-
-model_simple() {
-	case $(get_dt_model) in
-		"Hardkernel ODROID-C2")
-			echo "odroidc2"
-			;;
-		"Hardkernel ODROID-C4")
-			echo "odroidc4"
-			;;
-		"Hardkernel ODROID-GO2")
-			echo "odroidgo2"
-			;;
-		"Hardkernel ODROID-N2")
-			echo "odroidn2"
-			;;
-		"Hardkernel Odroid-XU4")
-			echo "odroidxu3"
-			;;
-	esac
-}
-
 flash_binary()
 {
 	device=${1}

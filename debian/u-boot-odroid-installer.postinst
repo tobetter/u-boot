@@ -6,7 +6,7 @@
 . /usr/lib/u-boot/library.sh
 . /usr/lib/odroid-base-installer/library.sh
 
-model=$(model_simple)
+model=$(odroid_model_simple)
 if [ "x${model}" = "" ]; then
 	log-output -t u-boot-odroid echo "warning: unknown device"
 	exit 1
