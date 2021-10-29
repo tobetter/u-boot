@@ -1,3 +1,9 @@
+u-boot-tools (2019.07+hkdk) focal; urgency=medium
+
+  * Fix to replace 'u-boot-tools'
+
+ -- Dongjin Kim <tobetter@gmail.com>  Fri, 29 Oct 2021 04:44:47 +0000
+
 u-boot (2019.07+dfsg-1ubuntu6) focal; urgency=medium
 
   [ Ethan Hsieh ]

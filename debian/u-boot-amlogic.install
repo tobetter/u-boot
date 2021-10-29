@@ -1,2 +1,0 @@
-#!/bin/sh
-debian/bin/u-boot-install-targets amlogic "board/amlogic/p200/README.odroid-c2 board/amlogic/p200/README.nanopi-k2 board/amlogic/p212/README.khadas-vim board/amlogic/p212/README.libretech-cc board/amlogic/q200/README.khadas-vim2"

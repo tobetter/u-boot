@@ -1,7 +1,0 @@
-#!/bin/sh
-
-case $DEB_HOST_GNU_TYPE in
-  aarch64-linux-gnu)
-    echo /usr/lib/u-boot/p2371-2180/uboot.elf /usr/lib/u-boot/p2371-2180/u-boot
-    ;;
-esac

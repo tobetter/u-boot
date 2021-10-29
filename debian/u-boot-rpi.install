@@ -1,4 +1,0 @@
-#!/bin/sh
-debian/bin/u-boot-install-targets rpi
-
-echo debian/bin/rpi-config-migration /usr/share/u-boot
