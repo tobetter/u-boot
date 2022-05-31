@@ -1,3 +1,9 @@
+u-boot-odroid (2022.05) stable; urgency=medium
+
+  * BUMP 2022.05
+
+ -- Dongjin Kim <tobetter@gmail.com>  Wed, 01 Jun 2022 03:49:11 +0900
+
 u-boot-odroid (2020.09) stable; urgency=medium
 
   * BUMP 2020.09
