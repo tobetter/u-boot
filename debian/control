@@ -40,6 +40,12 @@ Depends: ${misc:Depends}, u-boot-odroid
 Description: U-boot binaries for ODROID-N2
  This package will install U-boot binaries to ODROID-N2.
 
+Package: u-boot-odroidn2l
+Architecture: arm64
+Depends: ${misc:Depends}, u-boot-odroid
+Description: U-boot binaries for ODROID-N2L
+ This package will install U-boot binaries to ODROID-N2L.
+
 Package: u-boot-odroidgo2
 Architecture: arm64
 Depends: ${misc:Depends}, u-boot-odroid

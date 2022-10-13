@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# Copyright (C) 2022 Dongjin Kim <tobetter@gmail.com>
+#
+
+rm -f /usr/lib/u-boot/odroidn2l/files.md5sum
