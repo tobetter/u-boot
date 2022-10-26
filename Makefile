@@ -866,7 +866,7 @@ endif
 .PHONY : acs.bin
 ACS_BINARY := $(buildtree)/$(BOARDDIR)/firmware/acs.bin
 acs.bin: $(ACS_BINARY)
-$(ACS_BINARY): tools prepare u-boot.bin
+$(ACS_BINARY): tools prepare u-boot.bin ddr_parse
 	$(Q)$(MAKE) -C $(srctree)/$(CPUDIR)/${SOC}/firmware/acs all FIRMWARE=$@
 	$(Q)$(buildsrc)/fip/parse $(buildtree)/$(BOARDDIR)/firmware/acs.bin
 
