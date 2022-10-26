@@ -32,10 +32,14 @@ else
 V3_PROCESS_FLAG :=
 endif
 
+ifeq ($(wildcard $(srctree)/fip/$(SOC)/aml_encrypt_$(SOC)),)
 ifneq ("$(MACHINE_HARDWARE_NAME)","x86_64")
 FIP_DIR := qemu-x86_64 $(buildsrc)/fip
 else
 FIP_DIR := $(buildsrc)/fip
+endif
+else
+FIP_DIR := $(srctree)/fip
 endif
 
 # BL2 file size 41K, bl21 file size 3K (file size not equal runtime size) = total 44K
