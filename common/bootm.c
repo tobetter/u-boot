@@ -330,7 +330,7 @@ static int read_fdto_partition(void)
 #ifdef CONFIG_OF_LIBFDT_OVERLAY
 static int get_fdto_totalsize(u32 *tz)
 {
-	unsigned long long dtbo_mem_addr = NULL;
+	unsigned long long dtbo_mem_addr = (unsigned long long)NULL;
 	int ret;
 
 	ret = read_fdto_partition();
@@ -378,7 +378,7 @@ static int bootm_add_ignore_mpt_to_fdt(void *fdth)
 #ifdef CONFIG_OF_LIBFDT_OVERLAY
 static int do_fdt_overlay(void)
 {
-	unsigned long long dtbo_mem_addr = NULL;
+	unsigned long long dtbo_mem_addr = (unsigned long long)NULL;
 	int                dtbo_num = 0;
 	int                i;
 	char               cmd[128];
