@@ -1,6 +1,0 @@
-#!/bin/sh
-#
-# Copyright (C) 2022 Dongjin Kim <tobetter@gmail.com>
-#
-
-debian/bin/u-boot-install-targets odroidn2l
