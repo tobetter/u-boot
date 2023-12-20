@@ -1,0 +1,5 @@
+u-boot-odroidc5 (2024.09) stable; urgency=medium
+
+  * Initial commit
+
+ -- Dongjin Kim <tobetter@gmail.com>  Thu, 12 Sep 2024 10:29:12 +0900

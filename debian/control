@@ -1,0 +1,13 @@
+Source: u-boot-odroidc5
+Section: admin
+Priority: optional
+Maintainer: Dongjin Kim <tobetter@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: https://github.com/tobetter/u-boot
+
+Package: u-boot-odroidc5
+Architecture: arm64
+Depends: ${misc:Depends}, u-boot-odroid
+Description: U-boot binaries for ODROID-C4
+ This package will install U-boot binaries to ODROID-C4.
