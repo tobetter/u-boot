@@ -7,6 +7,7 @@
 #include <asm/unaligned.h>
 #include <mmc.h>
 #include <net.h>
+#include <spl.h>
 #include <asm/arch-rockchip/misc.h>
 
 #ifdef CONFIG_MISC_INIT_R
@@ -77,5 +78,37 @@ int misc_init_r(void)
 	ret = rockchip_cpuid_set(cpuid, cpuid_length);
 
 	return ret;
+}
+#endif
+
+#if defined(CONFIG_SPL_BUILD)
+static bool onboard_emmc(struct mmc *mmc)
+{
+	struct blk_desc *blk_dev = mmc ? mmc_get_blk_desc(mmc) : NULL;
+
+	if (!blk_dev || blk_dev->devnum != 0)
+		return false;
+
+	return true;
+}
+
+u32 board_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+{
+	if (boot_device == BOOT_DEVICE_MMC1)
+		return MMCSD_MODE_EMMCBOOT;
+
+	return MMCSD_MODE_RAW;
+}
+
+unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+		unsigned long raw_sect)
+{
+	return onboard_emmc(mmc) ? 0
+		: CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR;
+}
+
+int spl_mmc_emmc_boot_partition(struct mmc *mmc)
+{
+	return onboard_emmc(mmc) ? 2 : 0;
 }
 #endif
