@@ -66,9 +66,19 @@ u32 spl_boot_device(void)
 	return boot_device;
 }
 
+__weak u32 board_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+{
+	return MMCSD_MODE_UNDEFINED;
+}
+
 u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
 {
-	return MMCSD_MODE_RAW;
+	int ret = board_mmc_boot_mode(mmc, boot_device);
+
+	if (ret == MMCSD_MODE_UNDEFINED)
+		return MMCSD_MODE_RAW;
+
+	return ret;
 }
 
 #define TIMER_LOAD_COUNT_L	0x00
