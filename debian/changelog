@@ -1,3 +1,10 @@
+u-boot-odroidc5 (2025.01) stable; urgency=medium
+
+  * Amlogic BSP update (2025.01)
+  * ODROID fixes
+
+ -- Dongjin Kim <tobetter@gmail.com>  Fri, 14 Feb 2025 16:19:38 +0900
+
 u-boot-odroidc5 (2024.09) stable; urgency=medium
 
   * Initial commit
