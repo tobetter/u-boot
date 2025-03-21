@@ -9,5 +9,5 @@ Homepage: https://github.com/tobetter/u-boot
 Package: u-boot-odroidc5
 Architecture: arm64
 Depends: ${misc:Depends}, u-boot-odroid
-Description: U-boot binaries for ODROID-C4
- This package will install U-boot binaries to ODROID-C4.
+Description: U-boot binaries for ODROID-C5
+ This package will install U-boot binaries to ODROID-C5.
