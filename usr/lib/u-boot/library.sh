@@ -33,16 +33,21 @@ lookup_by_mount() {
 	echo ${mount%p*}
 }
 
-find_root_device()
+find_boot_device()
 {
 	if [ "x$BOOT_DEVICE" != "x" ]; then
 		echo ${BOOT_DEVICE}
 		return
 	fi
 
-	dev=$(lookup_by_mount "/target")
-	[ "x${dev}" = "x" ] && dev=$(lookup_by_mount "/")
+	dev=$(lookup_by_mount "/target/boot")
+	[ "x${dev}" = "x" ] && dev=$(lookup_by_mount "/boot")
 
 	dev=$(readlink -f ${dev})
 	echo ${dev%p*}
+}
+
+find_root_device()
+{
+	find_boot_device
 }

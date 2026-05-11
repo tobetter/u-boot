@@ -13,7 +13,7 @@ case "$1" in
 		;;
 	configure)
 		device=${BOOT_DEVICE}
-		[ "x${device}" = "x" ] && device=$(find_root_device)
+		[ "x${device}" = "x" ] && device=$(find_boot_device)
 		[ "x${device}" = "x" ] || flash_binary ${device} odroidn2
 		;;
 	*)
