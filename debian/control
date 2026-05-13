@@ -28,12 +28,6 @@ Depends: ${misc:Depends}, u-boot-odroid
 Description: U-boot binaries for ODROID-C2
  This package will install U-boot binaries to ODROID-C2.
 
-Package: u-boot-odroidc4
-Architecture: arm64
-Depends: ${misc:Depends}, u-boot-odroid
-Description: U-boot binaries for ODROID-C4
- This package will install U-boot binaries to ODROID-C4.
-
 Package: u-boot-odroidn2
 Architecture: arm64
 Depends: ${misc:Depends}, u-boot-odroid
